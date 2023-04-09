@@ -100,7 +100,7 @@ const handleClose = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    alert("Jéjé")
+    //alert("Jéjé")
     const requestOptions = {
       method: "POST",
       headers: { 
@@ -139,8 +139,9 @@ const handleClose = () => {
       })
       .catch((error) => {
         //alert("oups", error);
-        alert("oups, voici les potentiels erreurs  : "+ error);
+        //alert("oups, voici les potentiels erreurs  : "+ error);
         console.error("There was an error!", error);
+        setErrorMessage(""+error);
       });
      /* */
   };
@@ -201,7 +202,7 @@ const handleClose = () => {
           placeholder="Selectionnez votre date de naissance" />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="birthdate">
+      <Form.Group className="mb-3" controlId="birthdate" hidden>
         <Form.Label>Date de souscription</Form.Label>
         <Datepicker 
             type="text"  
@@ -211,24 +212,26 @@ const handleClose = () => {
             value={formattedDate}
             onChange={(date) => handleDateChange(date, "subscriptionDate")}
             //dateFormat="yyyy-MM-dd"
+            disabled
             readOnly
             required 
          />
       </Form.Group>
 
+      <Form.Group className="mb-3" controlId="email">
+        <Form.Label>Email (sera votre login)</Form.Label>
+        <Form.Control 
+          type="email"  
+          className="form-control" 
+          id="email" 
+          name="email" 
+          value={customer.email} 
+          onChange={handleChange} 
+          required 
+          placeholder="Entrez votre email" />
+      </Form.Group>
 
-        <div className="form-group">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            value={customer.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
@@ -322,10 +325,10 @@ const handleClose = () => {
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{isSuccess ? "Success" : "Error"}</Modal.Title>
+          <Modal.Title>{isSuccess ? "Félicitation !! " : "Inscription intérrompue"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {isSuccess ? "The operation was successful." : errorMessage}
+          {isSuccess ? "Votre inscription s'est bien éffectuée." : errorMessage}
         </Modal.Body>
         <Modal.Footer>
           {isSuccess ? (
