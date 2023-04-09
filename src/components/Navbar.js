@@ -22,6 +22,18 @@ function Navbar() {
             <li className="nav-item">
               <a className="nav-link" href="#">inscription </a>
             </li>
+
+            <li className="nav-item">
+              <a className="nav-link" href="#">inscription V2</a>
+            </li>
+
+            <li className="nav-item">
+              <a className="nav-link" href="#">inscription V2.1</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">inscription V3</a>
+            </li>
+
           </ul>
         </div>
       </div>
