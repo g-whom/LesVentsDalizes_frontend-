@@ -10,7 +10,7 @@ export default function Login(props) {
     return (
         <Row className="d-flex justify-content-center p-3 pt-5">
             <Card className="max-width-50-rem p-0">
-            <Card.Header className="text-center">Authentification</Card.Header>
+            <Card.Header className="text-center">(0°)Authentification</Card.Header>
                 <Row className="pt-4 ps-3 pe-3">
                     <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
                         <output>Identifiant</output>

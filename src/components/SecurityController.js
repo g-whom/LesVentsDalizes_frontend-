@@ -1,23 +1,26 @@
 import React from "react";
+//import { Link }  from "react-router-dom";
 
-    //import LoginExpress from "./LoginExpress";
-    import Login from "./Login";
+    import LoginExpress from "./LoginExpress";
+    //import Login from "./Login";
     
     export default function SecurityController(props) {
     
         const backUrl = "http://localhost:8097/security";
     
-        function fetchOwner(username, password) {
+        function fetchOwner(email, password) {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: username, password: password})
+                body: JSON.stringify({ email: email, password: password})
             };
             fetch(backUrl + "/authorize", requestOptions)
             .then((response) => {
                 if (!response.ok) {
                   // Si la réponse n'est pas OK, afficher le retour HTTP dans la console
                   console.log("Erreur HTTP :", response.status, response.statusText);
+                 // window.location.href ="/connect" ;
+                 
                 } else {
                   // Si la réponse est OK, récupérer le JSON de la réponse
                   return response.json();
@@ -39,6 +42,6 @@ import React from "react";
         }
     
         return (
-            <Login fetchOwner={(username, password) => fetchOwner(username, password)} />
+            <LoginExpress fetchOwner={(email, password) => fetchOwner(email, password)} />
         ); 
     }

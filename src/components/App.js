@@ -40,25 +40,9 @@ export default function App() {
                 <i className="fa fa-user me-2"></i>
                 Mon espace
             </Nav.Link>
-            <Nav.Link eventKey="3" as={Link} to="/login">
-                <i className="fa fa-key me-2"></i>
-                Coco
-            </Nav.Link>
-            <Nav.Link eventKey="3" as={Link} to="/customerForm">
-                <i className="fa fa-key me-2"></i>
-                Inscription V2
-            </Nav.Link>
-            <Nav.Link eventKey="3" as={Link} to="/customerFormV2">
-                <i className="fa fa-key me-2"></i>
-                Inscription V2.1
-            </Nav.Link>
             <Nav.Link eventKey="3" as={Link} to="/customerFormV3">
                 <i className="fa fa-key me-2"></i>
-                Inscription V3
-            </Nav.Link>
-            <Nav.Link eventKey="3" as={Link} to="/connect">
-                <i className="fa fa-key me-2"></i>
-                Connection
+                Inscription [ok]
             </Nav.Link> 
             <Nav.Link eventKey="3" as={Link} to="/loginExpress">
                 <i className="fa fa-key me-2"></i>
@@ -72,7 +56,7 @@ export default function App() {
               <Route exact path="/" element={<Welcome />} />
               <Route exact path="/welcome" element={<Welcome />} />
               <Route exact path="/space" element={<SpaceController owner={owner} setOwner={setOwner}/>} />
-              <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} />} />
+
               <Route exact path="/customerform" element={<CustomerForm  />} />
               <Route exact path="/customerformV2" element={<CustomerFormV2  />} />
               <Route exact path="/customerformV3" element={<CustomerFormV3  />} />

@@ -119,7 +119,7 @@ const handleRedirectToHomePage = () =>{
       body: JSON.stringify(customer),
     };   
     //http://localhost:8097/regisration/customer/new
-    fetch("http://localhost:8097/regisration/customer/new", requestOptions)
+    fetch("http://localhost:8097/security/register", requestOptions)
 
     /*
     .then(response => response.json())
@@ -364,7 +364,7 @@ const handleRedirectToHomePage = () =>{
               <Button variant="info" as={Link} to="/"  /*onClick={handleRedirectToHomePage}*/>
                 Retour à l'accueil
               </Button>
-              <Button variant="success" onClick={handleClose}>
+              <Button variant="success" as={Link} to="/loginExpress"onClick={handleClose}>
                 Se connecter
               </Button>         
             </>
