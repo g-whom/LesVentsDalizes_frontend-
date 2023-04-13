@@ -44,6 +44,27 @@ function CustomerForm(props) {
   };
 */
 
+
+  const onChange = (event) => {
+    const { name, value } = event.target;
+    setCustomer({
+      ...customer,
+      [name]: value,
+    });
+  };
+
+  const onAddressChange = (event) => {
+    const { name, value } = event.target;
+    setCustomer({
+      ...customer,
+      address: {
+        ...customer.address,
+        [name]: value,
+      },
+    });
+  };
+/************************************* */
+
   const handleSubmit = (event) => {
     event.preventDefault();
 

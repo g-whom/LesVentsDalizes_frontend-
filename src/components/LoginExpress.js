@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import { Card, Col, Form, InputGroup, Nav, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link }  from "react-router-dom";
 
-export default function Login(props) {
+export default function LoginExpress(props) {
 
     const [fields, setFields] = useState({ username: "", password: "" });
 
@@ -49,6 +48,7 @@ export default function Login(props) {
                     <Col sm={{ offset: 1, span: 10 }} lg={4} className="p-1">
                         <Nav.Link
                             className="btn btn-dark w-100 text-white"
+                          
                             as={Link} to="/welcome" 
                             onClick={() => props.fetchOwner(fields.username, fields.password)}
                         >

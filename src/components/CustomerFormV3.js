@@ -6,7 +6,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import axios from 'axios';
+//import axios from 'axios';
+import { Link } from "react-router-dom";
 //
 
 
@@ -95,6 +96,13 @@ const handleClose = () => {
   setErrorMessage("");
 
 };
+
+/**
+ * WF : afin de rediriger vers la page d'acceuil
+ */
+const handleRedirectToHomePage = () =>{
+  window.location.href="../" 
+}
 //*********************** */
 
   const handleSubmit = async (event) => {
@@ -140,8 +148,8 @@ const handleClose = () => {
       .catch((error) => {
         //alert("oups", error);
         //alert("oups, voici les potentiels erreurs  : "+ error);
-        console.error("There was an error!", error);
-        setErrorMessage(""+error);
+        //console.error("There was an error!", error);
+        setErrorMessage("" +error);
       });
      /* */
   };
@@ -219,7 +227,7 @@ const handleClose = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email (sera votre login)</Form.Label>
+        <Form.Label>Email</Form.Label>
         <Form.Control 
           type="email"  
           className="form-control" 
@@ -229,97 +237,117 @@ const handleClose = () => {
           onChange={handleChange} 
           required 
           placeholder="Entrez votre email" />
+          <Form.Text className="text-muted">
+            Petit rappel, votre email sera votre identifiant de connexion.
+          </Form.Text>
       </Form.Group>
 
+      <Form.Group className="mb-3" controlId="password">
+        <Form.Label>Mot de passe</Form.Label>
+        <Form.Control 
+          type="text"  
+          className="form-control" 
+          id="password" 
+          name="password" 
+          value={customer.password} 
+          onChange={handleChange} 
+          required 
+          placeholder="Entrez votre mot de passe" />
+          <Form.Text className="text-muted">
+            Il est fortement recommander de privilegier un bon mot de passe car les pirates ne sont jamais loin. 
+            <ul>
+              Alors il faudrait au minimum : 
+              <li>8 caractères</li>
+              <li>1 minuscule</li>
+              <li>1 majuscule</li>
+              <li>1 caratère spécial</li>
+              <li>1 caractère accentué</li>
+            </ul>
+            
+          </Form.Text>
+      </Form.Group>
 
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={customer.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phoneNumber">phoneNumber</label>
-          <input
-            type="text"
-            className="form-control"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={customer.phoneNumber}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <Form.Group className="mb-3" controlId="phoneNumbername">
+        <Form.Label>Numéro de téléphone</Form.Label>
+        <Form.Control 
+          type="text"  
+          className="form-control" 
+          id="phoneNumber" 
+          name="phoneNumber" 
+          value={customer.phoneNumber} 
+          onChange={handleChange} 
+          required 
+          placeholder="Entrez votre numéro de téléphone" />
+      </Form.Group>
 
-        <div className="form-group">
-          <label htmlFor="numberRoad">Number and road name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="numberRoad"
-            name="numberRoad"
-            value={customer.address.numberRoad}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <Form.Group className="mb-3" controlId="numberRoad">
+        <Form.Label>Numéro de voie</Form.Label>
+        <Form.Control 
+          type="text"  
+          className="form-control" 
+          id="numberRoad" 
+          name="numberRoad" 
+          value={customer.numberRoad} 
+          onChange={handleChange} 
+          required 
+          placeholder="Numéro de voie" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="nuroadmberRoad">
+        <Form.Label>Voie et nom de voie</Form.Label>
+        <Form.Control 
+          type="text"  
+          className="form-control" 
+          id="road" 
+          name="road" 
+          value={customer.road} 
+          onChange={handleChange} 
+          required 
+          placeholder="Nom de voie" />
+      </Form.Group>
+      
+      <Form.Group className="mb-3" controlId="zipCode">
+        <Form.Label>Code postal</Form.Label>
+        <Form.Control 
+          type="text"  
+          className="form-control" 
+          id="zipCode" 
+          name="zipCode" 
+          value={customer.zipCode} 
+          onChange={handleChange} 
+          required 
+          placeholder="Code postal" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="city">
+        <Form.Label>Ville</Form.Label>
+        <Form.Control 
+          type="text"  
+          className="form-control" 
+          id="city" 
+          name="city" 
+          value={customer.city} 
+          onChange={handleChange} 
+          required 
+          placeholder="Ville" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="country">
+        <Form.Label>Pays</Form.Label>
+        <Form.Control 
+          type="text"  
+          className="form-control" 
+          id="country" 
+          name="country" 
+          value={customer.country} 
+          onChange={handleChange} 
+          required 
+          placeholder="Pays" />
+      </Form.Group>
        
-        <div className="form-group">
-          <label htmlFor="road">Road name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="road"
-            name="road"
-            value={customer.address.road}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="zipCode">Zip code</label>
-          <input
-            type="text"
-            className="form-control"
-            id="zipCode"
-            name="zipCode"
-            value={customer.address.zipCode}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="city">City</label>
-          <input
-            type="text"
-            className="form-control"
-            id="city"
-            name="city"
-            value={customer.address.city}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="country">Country</label>
-          <input
-            type="text"
-            className="form-control"
-            id="country"
-            name="country"
-            value={customer.address.country}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      
         <button type="submit" className="btn btn-primary">
-          Submit
+          S'enregistrer
         </button>
       </Form>
 
@@ -332,13 +360,23 @@ const handleClose = () => {
         </Modal.Body>
         <Modal.Footer>
           {isSuccess ? (
-            <Button variant="success" onClick={handleClose}>
-              Continue
-            </Button>
+            <>
+              <Button variant="info" as={Link} to="/"  /*onClick={handleRedirectToHomePage}*/>
+                Retour à l'accueil
+              </Button>
+              <Button variant="success" onClick={handleClose}>
+                Se connecter
+              </Button>         
+            </>
           ) : (
-            <Button variant="danger" onClick={handleClose}>
-              Close
-            </Button>
+            <>
+              <Button variant="info" onClick={handleRedirectToHomePage}>
+                Retour à l'accueil
+              </Button>
+              <Button variant="danger" onClick={handleClose}>
+                Recommencer
+              </Button>
+            </>
           )}
         </Modal.Footer>
       </Modal>

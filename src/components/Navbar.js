@@ -33,7 +33,9 @@ function Navbar() {
             <li className="nav-item">
               <a className="nav-link" href="#">inscription V3</a>
             </li>
-
+            <li className="nav-item">
+              <a className="nav-link" href="#">connect</a>
+            </li>
           </ul>
         </div>
       </div>

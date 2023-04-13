@@ -6,17 +6,20 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Welcome from "./Welcome";
 import SecurityController from "./SecurityController";
 import SpaceController from "./SpaceController";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar} from "react-bootstrap";
 import CustomerForm from "./CustomerForm";
 import CustomerFormV2 from "./CustomerFormV2";
 import CustomerFormV3 from "./CustomerFormV3";
+import Connect from "./Connect";
+import LoginExpress from "./LoginExpress";
+//import Login from "./Login";
 
 export default function App() {
 
   const [owner, setOwner] = useState(null);
 
   function ownerName() {
-    return owner != null ? owner.name + " " + owner.surname : "";
+    return owner != null ? owner.id + " : "+owner.name + " " + owner.surname : "";
 }
 
   return (
@@ -39,7 +42,7 @@ export default function App() {
             </Nav.Link>
             <Nav.Link eventKey="3" as={Link} to="/login">
                 <i className="fa fa-key me-2"></i>
-                Inscription
+                Coco
             </Nav.Link>
             <Nav.Link eventKey="3" as={Link} to="/customerForm">
                 <i className="fa fa-key me-2"></i>
@@ -53,7 +56,14 @@ export default function App() {
                 <i className="fa fa-key me-2"></i>
                 Inscription V3
             </Nav.Link>
-
+            <Nav.Link eventKey="3" as={Link} to="/connect">
+                <i className="fa fa-key me-2"></i>
+                Connection
+            </Nav.Link> 
+            <Nav.Link eventKey="3" as={Link} to="/loginExpress">
+                <i className="fa fa-key me-2"></i>
+                Connexion [ok]
+            </Nav.Link>
             </Nav>
         </Navbar.Collapse>
         </Navbar>
@@ -66,7 +76,9 @@ export default function App() {
               <Route exact path="/customerform" element={<CustomerForm  />} />
               <Route exact path="/customerformV2" element={<CustomerFormV2  />} />
               <Route exact path="/customerformV3" element={<CustomerFormV3  />} />
-         
+              <Route exact path="/connect" element={<Connect  />} />
+              <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} />} />
+          
           </Routes>
         </Container>
       </BrowserRouter> 
