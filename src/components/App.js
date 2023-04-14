@@ -19,8 +19,57 @@ export default function App() {
   const [owner, setOwner] = useState(null);
 
   function ownerName() {
-    return owner != null ? owner.id + " : "+owner.name + " " + owner.surname : "";
+    return owner != null ? 
+    (
+      owner.id + " : "+owner.name + " " + owner.surname + " " + owner.birthdate 
+      
+    ) :""; 
 }
+
+//-------
+const logOut = () => {
+  // Gérer l'événement de clic ici
+  console.log("Le lien a été cliqué !");
+  setOwner(null);  
+  window.location.href ="/"
+};
+//-----
+
+
+/**
+ * WIP : affiche les liens de connexion | inscription ou deconnection
+ * @returns 
+ */
+function connectDisconect(){
+  return owner != null ? (
+            <>
+              <Nav.Link eventKey="4" as={Link} to="/"  onClick={logOut}>
+                <i className="fa fa-key me-2"></i>
+                Deconnection [WIP]
+              </Nav.Link>
+              
+            </>
+        ) : (
+          <>
+            <Nav.Link eventKey="3" as={Link} to="/customerFormV3"   >
+                <i className="fa fa-key me-2"></i>
+                Inscription [ok]
+              </Nav.Link>
+              <Nav.Link eventKey="4" as={Link} to="/loginExpress" >
+                <i className="fa fa-key me-2"></i>
+                Connexion [ok]
+            </Nav.Link>
+          </>
+        )
+  
+
+}
+
+//-- tentatives
+
+
+//----------------------------------/
+
 
   return (
     <BrowserRouter>
@@ -36,18 +85,12 @@ export default function App() {
                 <i className="fa fa-paw me-2"></i>
                 Accueil
             </Nav.Link>
-            <Nav.Link eventKey="2" as={Link} to="/space" hidden={owner === null}>
+            <Nav.Link eventKey="2" as={Link} to="/space" hidden={owner === null} >
                 <i className="fa fa-user me-2"></i>
                 Mon espace
-            </Nav.Link>
-            <Nav.Link eventKey="3" as={Link} to="/customerFormV3">
-                <i className="fa fa-key me-2"></i>
-                Inscription [ok]
             </Nav.Link> 
-            <Nav.Link eventKey="3" as={Link} to="/loginExpress">
-                <i className="fa fa-key me-2"></i>
-                Connexion [ok]
-            </Nav.Link>
+          {connectDisconect()}
+
             </Nav>
         </Navbar.Collapse>
         </Navbar>
@@ -56,13 +99,13 @@ export default function App() {
               <Route exact path="/" element={<Welcome />} />
               <Route exact path="/welcome" element={<Welcome />} />
               <Route exact path="/space" element={<SpaceController owner={owner} setOwner={setOwner}/>} />
-
+              <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} />} />
               <Route exact path="/customerform" element={<CustomerForm  />} />
               <Route exact path="/customerformV2" element={<CustomerFormV2  />} />
               <Route exact path="/customerformV3" element={<CustomerFormV3  />} />
               <Route exact path="/connect" element={<Connect  />} />
               <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} />} />
-          
+
           </Routes>
         </Container>
       </BrowserRouter> 

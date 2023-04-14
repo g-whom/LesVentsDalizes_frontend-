@@ -12,7 +12,7 @@ export default function LoginExpress(props) {
             <Card.Header className="text-center">ok Authentification</Card.Header>
                 <Row className="pt-4 ps-3 pe-3">
                     <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
-                        <output>Identifiant</output>
+                        <output>Identifiant : jeje@whum.com</output>
                     </Col>
                     <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
                         <InputGroup className="mb-3">

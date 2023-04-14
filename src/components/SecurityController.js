@@ -34,6 +34,8 @@ import React from "react";
                   id: json.owner.id,
                   name: json.owner.name,
                   surname: json.owner.surname,
+                  mail: json.owner.email,
+                  birthdate: json.owner.birthdate,
                 });
               })
               .catch((error) => {
