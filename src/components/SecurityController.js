@@ -44,7 +44,7 @@ import LoginExpress from "./LoginExpress";
         return (
             <>
               <LoginExpress fetchOwner={(username, password) => fetchOwner(username, password)} />
-              <FetchEventView  owner={()=>props.owner} /> 
+              <FetchEventController  owner={()=>props.owner} /> 
             </>  
         ); 
     }

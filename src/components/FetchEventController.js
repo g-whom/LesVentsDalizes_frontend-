@@ -46,7 +46,8 @@ export default function FetchEventController(props){
             });
     }
 
-    return (
+
+    return  (
         <>
             <FetchEventView owner={props.owner}  events={events} onFetch={() => fetchEvents()}/>
         </>

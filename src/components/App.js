@@ -7,12 +7,19 @@ import Welcome from "./Welcome";
 import SecurityController from "./SecurityController";
 import SpaceController from "./SpaceController";
 import { Container, Nav, Navbar} from "react-bootstrap";
+import{DropdownButton, Dropdown, NavDropdown} from "react-bootstrap";
 import CustomerForm from "./CustomerForm";
 import CustomerFormV2 from "./CustomerFormV2";
 import CustomerFormV3 from "./CustomerFormV3";
 import Connect from "./Connect";
 import LoginExpress from "./LoginExpress";
 import FetchEventController from "./FetchEventController";
+
+
+import "../css/fontawesome.all.min.css";
+
+
+
 //import Login from "./Login";
 
 export default function App() {
@@ -40,7 +47,7 @@ function showAllEvents(){
   return owner != null ? (
     <>
             <Nav.Link eventKey="4" as={Link}  to="/FetchEventController"  >
-                <i className="fa fa-key me-2"></i>
+                <i className="fa-light fa-list-ul"></i>
                 Evennements [WIP]
               </Nav.Link>
     </>
@@ -51,6 +58,44 @@ function showAllEvents(){
 }
 
 /**
+ * WIP: Menu pour les prestation (Customer)
+ * @returns 
+ */
+function handlePerformMenu(){
+  return owner != null ?(
+    <>
+      <Nav.Link eventKey="5" as={Link} to="/RequestPerform"  onClick={logOut}>
+        <i className="fa-light fa-masks-theater"></i>
+        <i className="fa-duotone fa-masks-theater"></i>
+        Menu prestation [WIP]
+      </Nav.Link>
+    </>
+  ) : (<></>)
+}
+
+
+/**
+ * WIP: Menu pour la gestion de comtpe (Customer)
+ * @returns 
+ */
+function handleAccount(){
+  return owner != null ?(
+    <>
+      
+      <i className="fa fa-address-card me-2"></i>      
+        <NavDropdown  title="Mon compte [WIP]" >
+          <NavDropdown.Item eventKey="option1"> [wait] Mes inforlations personelles</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option2">[wait] Mon adresse</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item eventKey="option4">[wait] Mes identifiants</NavDropdown.Item>
+        </NavDropdown>
+
+     
+    </>
+  ) : (<></>)
+}
+
+/**
  * WIP : affiche les liens de connexion | inscription ou deconnection
  * @returns 
  */
@@ -58,7 +103,7 @@ function connectDisconect(){
   return owner != null ? (
             <>
               <Nav.Link eventKey="4" as={Link} to="/"  onClick={logOut}>
-                <i className="fa fa-key me-2"></i>
+                <i className="fa-sharp solid fa-right-from-bracket"></i>
                 Deconnection [WIP]
               </Nav.Link>
               
@@ -66,11 +111,12 @@ function connectDisconect(){
         ) : (
           <>
             <Nav.Link eventKey="3" as={Link} to="/customerFormV3"   >
-                <i className="fa fa-key me-2"></i>
+                <i className="fa-sharp fa-light fa-memo-pad"></i>
                 Inscription [ok]
               </Nav.Link>
               <Nav.Link eventKey="4" as={Link} to="/loginExpress" >
                 <i className="fa fa-key me-2"></i>
+               
                 Connexion [ok]
             </Nav.Link>
           </>
@@ -82,7 +128,7 @@ function connectDisconect(){
   return (
     <BrowserRouter>
       <header className="text-center bg-light">
-        <h1>Les Vents Dalizés<i className="m-4 fa fa-paw text-warning"></i></h1>
+        <h1>Les Vents Dalizés<i className="fa-sharp fa-light fa-wind"></i></h1>
       </header>
         <Navbar collapseOnSelect="true" bg="dark" variant="dark" sticky="top" expand="md">
         <Navbar.Brand className="ms-2">{ownerName()}</Navbar.Brand>
@@ -90,13 +136,15 @@ function connectDisconect(){
         <Navbar.Collapse  id="responsive-navbar-nav">
             <Nav className="ms-auto me-2 flex-wrap">
             <Nav.Link eventKey="1" as={Link} to="/welcome">
-                <i className="fa fa-paw me-2"></i>
+               
                 Accueil
             </Nav.Link>
-            <Nav.Link eventKey="2" as={Link} to="/space" hidden={owner == null} >
+            <Nav.Link eventKey="2" as={Link} to="/welcome" hidden={owner == null} >
                 <i className="fa fa-user me-2"></i>
-                Mon espace       
+                [wait]Mon espace       
             </Nav.Link> 
+            {handlePerformMenu()}
+            {handleAccount()}
             {showAllEvents()}
           {connectDisconect()}
             </Nav>
