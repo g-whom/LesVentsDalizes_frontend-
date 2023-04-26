@@ -37,7 +37,7 @@ function CustomerFormV3() {
     surname: "",
     birthdate: null,
     subscriptionDate: null,
-    email: "",
+    username: "",
     password:"",
     phoneNumber:"",
     accountClosingDate: null,
@@ -47,7 +47,10 @@ function CustomerFormV3() {
         zipCode: "",
         city: "",
         country:"", 
-    },
+    },/*
+    roles:[
+      {id:"3"}]*/
+    
 });
 
 const handleChange = (event) => {
@@ -226,14 +229,14 @@ const handleRedirectToHomePage = () =>{
          />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email</Form.Label>
+      <Form.Group className="mb-3" controlId="username">
+        <Form.Label>Username</Form.Label>
         <Form.Control 
-          type="email"  
+          type="username"  
           className="form-control" 
-          id="email" 
-          name="email" 
-          value={customer.email} 
+          id="username" 
+          name="username" 
+          value={customer.username} 
           onChange={handleChange} 
           required 
           placeholder="Entrez votre email" />

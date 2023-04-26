@@ -4,7 +4,7 @@ import { Link }  from "react-router-dom";
 
 export default function LoginExpress(props) {
 
-    const [fields, setFields] = useState({ email: "", password: "" });
+    const [fields, setFields] = useState({ username: "", password: "" });
 
     return (
         <Row className="d-flex justify-content-center p-3 pt-5">
@@ -16,13 +16,13 @@ export default function LoginExpress(props) {
                     </Col>
                     <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
                         <InputGroup className="mb-3">
-                            <InputGroup.Text id="inpEmail"><i className="fa fa-user"></i></InputGroup.Text>
+                            <InputGroup.Text id="inpUsername"><i className="fa fa-user"></i></InputGroup.Text>
                             <Form.Control 
                                 type="text"
-                                aria-describedby="inpEmail"
+                                aria-describedby="inpUsername"
                                 placeholder="Veuillez entrer un identifiant"
-                                value={fields.email}
-                                onChange={form => setFields({...fields, email: form.target.value})}
+                                value={fields.username}
+                                onChange={form => setFields({...fields, username: form.target.value})}
                             />
                         </InputGroup>
                     </Col>
@@ -50,7 +50,7 @@ export default function LoginExpress(props) {
                             className="btn btn-dark w-100 text-white"
                           
                             as={Link} to="/welcome" 
-                            onClick={() => props.fetchOwner(fields.email, fields.password)}
+                            onClick={() => props.fetchOwner(fields.username, fields.password)}
                         >
                             Connexion
                         </Nav.Link>

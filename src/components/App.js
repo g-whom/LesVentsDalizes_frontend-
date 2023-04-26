@@ -12,16 +12,18 @@ import CustomerFormV2 from "./CustomerFormV2";
 import CustomerFormV3 from "./CustomerFormV3";
 import Connect from "./Connect";
 import LoginExpress from "./LoginExpress";
+import FetchEventController from "./FetchEventController";
 //import Login from "./Login";
 
 export default function App() {
 
   const [owner, setOwner] = useState(null);
+  const [events, setEvents] = useState(null);
 
   function ownerName() {
     return owner != null ? 
     (
-      owner.id + " : "+owner.name + " " + owner.surname + " " + owner.birthdate 
+      owner.id + " : "+owner.name + " " + owner.surname //+ " " + owner.token 
       
     ) :""; 
 }
@@ -34,7 +36,19 @@ const logOut = () => {
   window.location.href ="/"
 };
 //-----
-
+function showAllEvents(){
+  return owner != null ? (
+    <>
+            <Nav.Link eventKey="4" as={Link}  to="/FetchEventController"  >
+                <i className="fa fa-key me-2"></i>
+                Evennements [WIP]
+              </Nav.Link>
+    </>
+  ) : (
+    <>
+    </>
+  ) 
+}
 
 /**
  * WIP : affiche les liens de connexion | inscription ou deconnection
@@ -65,12 +79,6 @@ function connectDisconect(){
 
 }
 
-//-- tentatives
-
-
-//----------------------------------/
-
-
   return (
     <BrowserRouter>
       <header className="text-center bg-light">
@@ -85,12 +93,12 @@ function connectDisconect(){
                 <i className="fa fa-paw me-2"></i>
                 Accueil
             </Nav.Link>
-            <Nav.Link eventKey="2" as={Link} to="/space" hidden={owner === null} >
+            <Nav.Link eventKey="2" as={Link} to="/space" hidden={owner == null} >
                 <i className="fa fa-user me-2"></i>
-                Mon espace
+                Mon espace       
             </Nav.Link> 
+            {showAllEvents()}
           {connectDisconect()}
-
             </Nav>
         </Navbar.Collapse>
         </Navbar>
@@ -104,6 +112,7 @@ function connectDisconect(){
               <Route exact path="/customerformV2" element={<CustomerFormV2  />} />
               <Route exact path="/customerformV3" element={<CustomerFormV3  />} />
               <Route exact path="/connect" element={<Connect  />} />
+              <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} />} />
               <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} />} />
 
           </Routes>

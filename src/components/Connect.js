@@ -14,18 +14,8 @@ export default function Connect(){
     
 
     const handleChange = (event) => {
-      /*const { name, value } = event.target;
-      setCustomer(prevCustomer => ({
-          ...prevCustomer,
-          [name]: value
-        }));
-      }*/
+
     };
-//***************************************************************************** */
-
-//**************************************************************************** */
-
-
 
     const handleLogin = () => {
         // Simuler une connexion réussie
@@ -40,10 +30,6 @@ export default function Connect(){
         setIsLoggedIn(false);
         setUsername("");
       };
-    
-
-
-
     
     return(
         <>
