@@ -81,9 +81,9 @@ function handlePerformMenu(){
 function handleAccount(){
   return owner != null ?(
     <>
-      
+      <i className="fa fa-user me-2"></i>
       <i className="fa fa-address-card me-2"></i>      
-        <NavDropdown  title="Mon compte [WIP]" >
+        <NavDropdown  title={<i className="fa fa-user me-2">"Mon compte [WIP]"</i> } > 
           <NavDropdown.Item eventKey="option1"> [wait] Mes inforlations personelles</NavDropdown.Item>
           <NavDropdown.Item eventKey="option2">[wait] Mon adresse</NavDropdown.Item>
           <NavDropdown.Divider />
