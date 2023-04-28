@@ -3,6 +3,7 @@ import FetchEventController from "./FetchEventController";
 import FetchEventView from "./FetchEventView";
 //import { Link }  from "react-router-dom";
 import LoginExpress from "./LoginExpress";
+import DataCustomerController from "./DataCustomerController";
 
 
     
@@ -45,6 +46,7 @@ import LoginExpress from "./LoginExpress";
             <>
               <LoginExpress fetchOwner={(username, password) => fetchOwner(username, password)} />
               <FetchEventController  owner={()=>props.owner} /> 
+          
             </>  
         ); 
     }
