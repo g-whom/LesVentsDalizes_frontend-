@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 
 export default function DataCustomerView(props){
 
-    const [readOnly, setReadOnly] = useState(false);
+    const [readOnly, setreadOnly] = useState(false);
     
 
     const[customer, setCustomer] = useState({
@@ -19,14 +19,14 @@ export default function DataCustomerView(props){
         phoneNumber:""}, []);
 
 
-    const handleBothIsEditClickAndToggleReadOnly = async (event) => {
+    const handleBothIsEditClickAndTogglereadOnly = async (event) => {
        // event.preventDefault();
         handleEditClick();
-        handleToggleReadOnly();
+        handleTogglereadOnly();
     }
         
-    function handleToggleReadOnly() {
-            setReadOnly(!readOnly);
+    function handleTogglereadOnly() {
+            setreadOnly(!readOnly);
     }
 
    /* 
@@ -70,7 +70,7 @@ export default function DataCustomerView(props){
     const handleEditClick = async (event) => {
         event.preventDefault();
         setIsediting(true);
-        handleToggleReadOnly()
+        handleTogglereadOnly()
       };
     
       const handleSaveClick = async (event) => {
@@ -106,7 +106,7 @@ export default function DataCustomerView(props){
                     id="id" 
                     name="id" 
                     
-                    readonly="true"
+                    readOnly={true}
                     value={props.customerDatabase.id} 
                     onChange={handleInputChange} 
                    // disable={!isEditing}
@@ -122,7 +122,7 @@ export default function DataCustomerView(props){
                     id="name" 
                     name="name" 
                     disabled 
-                    readonly={readOnly}
+                    readOnly={false}
                     value={props.customerDatabase.name} 
                     onChange={handleInputChange} 
                   // disable={!isEditing}
@@ -137,7 +137,7 @@ export default function DataCustomerView(props){
                     className="form-control" 
                     id="surname" 
                     name="surname" 
-                    readonly={readOnly}
+                    readOnly={readOnly}
                     value={props.customerDatabase.surname} 
                     onChange={handleInputChange} 
                  //   disable={!isEditing}
@@ -152,7 +152,7 @@ export default function DataCustomerView(props){
                     className="form-control" 
                     id="username" 
                     name="username" 
-                    readonly="true"
+                    readOnly={true}
                     value={props.customerDatabase.username} 
                     onChange={handleInputChange} 
                   // disable={!isEditing}
@@ -168,7 +168,7 @@ export default function DataCustomerView(props){
                     id="birthdate" 
                     name="birthdate" 
                   //  dateFormat="yyyy-MM-dd"
-                    readonly={readOnly}
+                    readOnly={readOnly}
                     value={props.customerDatabase.birthdate} 
                     onChange={handleInputChange} 
                   //  disable={!isEditing}
@@ -183,7 +183,7 @@ export default function DataCustomerView(props){
                     className="form-control" 
                     id="phoneNumber" 
                     name="phoneNumber" 
-                    readonly={readOnly}
+                    readOnly={readOnly}
                     value={props.customerDatabase.phoneNumber} 
                     onChange={handleInputChange} 
                   //  disable={!isEditing}
