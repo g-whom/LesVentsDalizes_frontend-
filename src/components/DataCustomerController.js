@@ -64,7 +64,7 @@ import DataCustomerView from "./DataCustomerView"
         }
 
 
-    function updateDataCustomer(){
+        async function updateDataCustomer(){
         const requestOptions = {
             method: "PUT",
             headers: { "Authorization": "Bearer " + props.owner.token ,

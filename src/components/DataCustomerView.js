@@ -3,21 +3,101 @@ import{fetchCustomer, updateDataCustomer} from "./DataCustomerController";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Datepicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
+import { format, parse } from 'date-fns';
 
 
 export default function DataCustomerView(props){
 
     const [readOnly, setreadOnly] = useState(false);
+
+    /**
+   * date minimal acceptée dans le datepicker des dates de naissance des nouveaux customer
+   */
+    const maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() - 100);
+    const date = new Date();
+    const formattedDate = date.toISOString().substring(0, 10);
+
+//-------------------------------------------------------------------
+function convertDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
+  
+function formatDateForDatePicker(dateStr) {
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // +1 car les mois vont de 0 à 11
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+  
+  const dateCustomerDatase = formatDateForDatePicker(props.customerDatabase.birthdate);
+
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  }
+
+
+
+    const [selectedDate, setSelectedDate] = useState("");
+/*
+    // Suppose que props.date est une chaîne de caractères représentant une date au format ISO (par exemple "2022-05-01T00:00:00.000Z")
+    const initialDate = new Date(props.customerDatabase.birthdate);
+    const formattedDate = initialDate.toISOString().split("T")[0]; // extrait la partie date sous forme de chaîne de caractères "yyyy-MM-dd"
+
+    useEffect(() => {
+    setSelectedDate(formattedDate); // met à jour l'état avec la date formatée
+    }, []);
+
+*/
+    //----------------------------------------------------------------
+
     
 
     const[customer, setCustomer] = useState({
-        id: "",
-        name: "", //props.ownerData.name, 
-        surname: "",
-        username:"",
-        birthdate: "",
-        phoneNumber:""}, []);
+        id: props.customerDatabase.id ,
+        name: "" ,
+        surname:  "",
+        username:  "",
+        birthdate:  "",
+        phoneNumber:  ""}, []);
 
+
+    const handleInputChange = (event) => {
+       // event.preventDefault();
+      //  const { name, value } = event.target;
+      //  setCustomer({ ...customer, [name]: value });
+      //const { name, value } = event.target;
+
+        //const target = event.target;
+        //const value = target.value;
+      // const name = target.name;
+
+       // const { name, value } = target;
+
+       const { name, value } = event.target;
+      setCustomer(customer => ({
+           ...customer,
+          [name]: value
+      }));
+
+     // setCustomer({ ...customer, id: props.customerDatabase.id ,username: props.customerDatabase.username });
+     // setCustomer({ ...customer, username: props.customerDatabase.username });
+      console.log("oups   "+customer)
+    };
 
     const handleBothIsEditClickAndTogglereadOnly = async (event) => {
        // event.preventDefault();
@@ -29,56 +109,116 @@ export default function DataCustomerView(props){
             setreadOnly(!readOnly);
     }
 
-   /* 
-    useEffect(() => {
-        setCustomer(prevState => ({
-            ...prevState,     
-            id: props.setOwnerData.id,
-            name: props.setOwnerData.name,
-            surname: props.setOwnerData.surname,
-            username: props.setOwnerData.username,
-            birthdate: props.setOwnerData.birthdate,
-            phoneNumber: props.setOwnerData.phoneNumber,
-            }));
-        }, [props.setOwnerData]);
-        */
-
-      //  [props.setOwnerData]
-    //---------------------
-    //props.setOwnerData);
-   // setCustomer( props.setOwnerData);
-
     const [isEditing, setIsediting] = useState(false);
-/*
-    useEffect(() => {
-        props.fetchCustomer().then((data) => setCustomer(data));
-        }, [])
-*/
 
-    const handleInputChange = (event) => {
-        
-        const { name, value } = event.target;
-        setCustomer({ ...customer, [name]: value });
-    };
-
-    /*
-
-    const handleSubmit = async (event) => {
-    event.preventDefault();
-    */
-
+    /**
+     * WIP: declecneh le formulaire de modification
+     * - copies les données de l'utilisateur actuelles avant eventuelle modifications
+     */
     const handleEditClick = async (event) => {
         event.preventDefault();
         setIsediting(true);
         handleTogglereadOnly()
+
+        console.log("quelle est la date de naissance ?? : "+props.customerDatabase.birthdate)
+        console.log('bus : '+ dateCustomerDatase)
+
+
+        //phase reverseeeing
+        //import { format, parse } from 'date-fns';
+
+        //import moment from 'moment';
+
+// ...
+        console.log("petit retou --- #6 !!-----------------------------------");
+        const dateStr6 = 'Tue Mar 28 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)';
+        const dateObj6 = moment(dateStr6, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+        const formattedDate6 = dateObj6.format('YYYY-MM-DD');
+
+        console.log("??????????00  :  "+formattedDate6); // output: '2023-03-28'
+
+/*
+        console.log("petit retou --- #5-----------------------------------");
+        const { parse, format } = require('date-fns');
+
+        const dateStr5 = 'Tue Mar 28 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)';
+        const dateObj5 = parse(dateStr5, "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzz)", new Date());
+        const formattedDate5 = format(dateObj5, 'yyyy-MM-dd');
+        console.log("Date formatée : " + formattedDate5);
+
+
+        console.log("petit retou --- #4-----------------------------------");
+
+        const dateStr4 = 'Tue Mar 28 2023 00:00:00 GMT+0200';
+        const dateObj4 = parse(dateStr4, 'ddd MMM DD YYYY HH:mm:ss \'GMT\'Z', new Date());
+        const formattedDate4 = format(dateObj4, 'yyyy-MM-dd');
+        console.log("petit retour pour voir si le reverse est efficace : "+formattedDate4);
+
+       
+        console.log("petit retou --- #3-----------------------------------");
+
+        const dateStr3 = 'Tue Mar 28 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)';
+        const dateObj3 = parse(dateStr3, 'EEE MMM dd yyyy HH:mm:ss \'GMT\'Z (zzz)', new Date());
+        const formattedDate3 = format(dateObj3, 'yyyy-MM-dd');
+        console.log("petit retour pour voir si le reverse est efficace : " + formattedDate3);
+
+
+        console.log("petit retou --- #1-----------------------------------");
+
+        const dateReversed = props.customerDatabase.birthdate;
+        const dateObj = moment(dateReversed, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+        const dateFormattedWep = dateObj.format('YYYY-MM-DD');
+        
+        console.log("la valeur du props : "+props.customerDatabase.birthdate);
+        console.log("la valeur de la converttion a priori  : "+dateObj);
+        console.log("la valeur de la converttion a priori  : "+dateFormattedWep);
+
+        console.log("petit retou ---- #2----------------------------------");
+        const dateStr2 = 'Tue Mar 28 2023 00:00:00 GMT+0200';
+        const dateObj2 = parse(dateStr2, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ', new Date());
+        const formattedDate2 = format(dateObj2, 'yyyy-MM-dd');
+        console.log("petit retour pour voir si le reverse est efficace : "+formattedDate2);
+*/
+        setCustomer(customer => ({
+            ...customer,
+           id: props.customerDatabase.id,
+           username: props.customerDatabase.username,
+           name: props.customerDatabase.name,
+           surname: props.customerDatabase.surname,
+           phoneNumber: props.customerDatabase.phoneNumber,
+           birthdate:date
+          // birthdate: props.customerDatabase.birthdate
+           // birthdate:dateCustomerDatase// formattedDate//formattedDate// props.customerDatabase.birthdate
+       }));
       };
     
       const handleSaveClick = async (event) => {
         event.preventDefault();
-       props.updateDataCustomer(user);
+        console.log(customer)
+   
        setIsediting(false);
       };
 
+      const handleDateChange = (date, field) => {
+        const dateStr = date;
+
+        //Pour affixher le format classique
+        const dateFarmatted = moment(dateStr, "ddd MMM DD YYYY HH:mm:ss [GMT]ZZ").format("YYYY-MM-DD");
+        console.log("la date formatte serait donc de : "+dateFarmatted);
+
+
+        console.log("petit retou --- #6 BIS!!-----------------------------------");
+        const dateStr6 = date;
+        const dateObj6 = moment(dateStr6, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+        const formattedDate6 = dateObj6.format('YYYY-MM-DD');
+
+        console.log("????????? 6-BIS  :  "+formattedDate6); // output: '2023-03-28'
+
+      
+
+        setCustomer({ ...customer, birthdate: date });
+        
+      };
 
     return(
         <>
@@ -93,107 +233,148 @@ export default function DataCustomerView(props){
                    
                 <br/>
                 <Form 
-                onSubmit={handleEditClick}
+                onSubmit={handleSaveClick}//{handleEditClick}
   
                 >
 
-                <Form.Group className="mb-3 d-none" >
-                    
-                    <Form.Label>Id</Form.Label>
-                    <Form.Control 
-                    type="text"  
-                   // className="form-control" 
-                    id="id" 
-                    name="id" 
-                    
-                    readOnly={true}
-                    value={props.customerDatabase.id} 
-                    onChange={handleInputChange} 
-                   // disable={!isEditing}
-                    required 
-                    placeholder="Pour votre id " />
+                <Form.Group className="mb-3" >
+                        <Form.Label>Nom</Form.Label>
+                        {!isEditing ? 
+                            <>
+                                <Form.Control 
+                                type="text"  className="form-control" 
+                                id="name" name="name" 
+                                disabled readOnly
+                                //value= {props.customerDatabase.name} 
+                               // onChange={handleInputChange} 
+                               defaultValue={props.customerDatabase.name}
+                               onChange={handleInputChange}    
+                                required 
+                                />
+                            </>
+                            :
+                            <>
+                                <Form.Control 
+                                    type="text"  
+                                    className="form-control" 
+                                    id="name" 
+                                    name="name" 
+                                    onChange={handleInputChange}  
+                                    required 
+                              
+                                />
+                                <Form.Text className="text-muted">
+                                    Nom précédent :   {props.customerDatabase.name} 
+                                </Form.Text>
+                            </>
+                        }
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
-                    <Form.Label>Nom</Form.Label>
-                    <Form.Control 
-                    type="text"  
-                    className="form-control" 
-                    id="name" 
-                    name="name" 
-                    disabled 
-                    readOnly={false}
-                    value={props.customerDatabase.name} 
-                    onChange={handleInputChange} 
-                  // disable={!isEditing}
-                    required 
-                    placeholder="Enter votre nom" />
+                        <Form.Label>Prénom</Form.Label>
+                        {!isEditing ? 
+                            <>
+                                <Form.Control 
+                                type="text"  className="form-control" 
+                                id="surname" name="surname" 
+                                disabled readOnly
+                                defaultValue= {props.customerDatabase.surname} 
+                                onChange={handleInputChange}   
+                                onBlur={handleInputChange} 
+                                required 
+                                />
+                            </>
+                            :
+                            <>
+                                <Form.Control 
+                                    type="text"  className="form-control" 
+                                    id="surname"  name="surname" 
+                                    onChange={handleInputChange} 
+                                    onBlur={handleInputChange} 
+                                    placeholder= {props.customerDatabase.surname} 
+                                    required
+                                />
+                                <Form.Text className="text-muted">
+                                    Prénom précédent :   {props.customerDatabase.surname} 
+                                </Form.Text>
+                            </>
+                        }
+                </Form.Group>
+
+
+                <Form.Group className="mb-3" >
+                        <Form.Label>Date de naissance</Form.Label>
+                        {!isEditing ? 
+                            <>
+                                <Datepicker 
+                                    type="text"  className="form-control" 
+                                    id="birthdate" name="birthdate"
+                                   selected={customer.birthdate} 
+                                    disabled readOnly
+                                    value= {props.customerDatabase.birthdate} 
+                                    onChange={handleInputChange} 
+                                    //onChange={(date) => handleDateChange(date, "birthdate")}   
+                                    required 
+                                />
+                            </>
+                            :
+                            <>
+                                <Datepicker 
+                                    type="text"  className="form-control" 
+                                    id="birthdate"  name="birthdate" 
+                                    selected={customer.birthdate}  
+                                   // value={formattedDate}
+                                    //onChange={handleInputChange}
+                                    onChange={(date) => handleDateChange(date, "birthdate")}
+                                    placeholder= {props.customerDatabase.birthdate} 
+                                    dateFormat="yyyy-MM-dd"
+                                    minDate={maxDate} 
+                                    maxDate={new Date()}
+                                    showMonthDropdown
+                                    showYearDropdown
+                                    dropdownMode="select"
+                                    required
+                                />
+                                <Form.Text className="text-muted">
+                                    Date de naissance précédente :   {props.customerDatabase.birthdate} 
+                                </Form.Text>
+                            </>
+                        }
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
-                    <Form.Label>Prénom</Form.Label>
-                    <Form.Control 
-                    type="text"  
-                    className="form-control" 
-                    id="surname" 
-                    name="surname" 
-                    readOnly={readOnly}
-                    value={props.customerDatabase.surname} 
-                    onChange={handleInputChange} 
-                 //   disable={!isEditing}
-                    required 
-                    placeholder="Enter votre prénom" />
+                        <Form.Label>Numéro de téléphone</Form.Label>
+                        {!isEditing ? 
+                            <>
+                                <Form.Control 
+                                type="text"  className="form-control" 
+                                id="phoneNumber" name="phoneNumber" 
+                                disabled readOnly
+                                defaultValue= {props.customerDatabase.phoneNumber} 
+                                onChange={handleInputChange}    
+                                required 
+                                />
+                            </>
+                            :
+                            <>
+                                <Form.Control 
+                                    type="text"  className="form-control" 
+                                    id="phoneNumber"  name="phoneNumber" 
+                                    onChange={handleInputChange}  
+                                    placeholder= {props.customerDatabase.phoneNumber} 
+                                    required
+                                />
+                                <Form.Text className="text-muted">
+                                    Numéro de téléphone précédent :   {props.customerDatabase.phoneNumber} 
+                                </Form.Text>
+                            </>
+                        }
                 </Form.Group>
-
-                <Form.Group className="mb-3 d-none">
-                    <Form.Label>identifiant</Form.Label>
-                    <Form.Control 
-                    type="text"  
-                    className="form-control" 
-                    id="username" 
-                    name="username" 
-                    readOnly={true}
-                    value={props.customerDatabase.username} 
-                    onChange={handleInputChange} 
-                  // disable={!isEditing}
-                    required 
-                    placeholder="Enter votre identifiant" />
-                </Form.Group>
-
-                <Form.Group className="mb-3" >
-                    <Form.Label>Date de naissance</Form.Label>
-                    <Form.Control 
-                    type="text"  
-                    className="form-control" 
-                    id="birthdate" 
-                    name="birthdate" 
-                  //  dateFormat="yyyy-MM-dd"
-                    readOnly={readOnly}
-                    value={props.customerDatabase.birthdate} 
-                    onChange={handleInputChange} 
-                  //  disable={!isEditing}
-                    required 
-                    placeholder="Enter votre date de naissance" />
-                </Form.Group>
-
-                <Form.Group className="mb-3" >
-                    <Form.Label>Numéro de téléphone</Form.Label>
-                    <Form.Control 
-                    type="text"  
-                    className="form-control" 
-                    id="phoneNumber" 
-                    name="phoneNumber" 
-                    readOnly={readOnly}
-                    value={props.customerDatabase.phoneNumber} 
-                    onChange={handleInputChange} 
-                  //  disable={!isEditing}
-                    required 
-                    placeholder="Enter votre numero de téléphone" />
-                </Form.Group>                
+               
                 
                 {isEditing ? 
                 (
-                    <Button type="submit" onClick={handleSaveClick}>
+                    <Button type="submit" onClick={handleSaveClick} className="sx-10 md-8">
                     Enregistrer les modifications
                     </Button>
 
@@ -201,11 +382,11 @@ export default function DataCustomerView(props){
                     <>
                     
 
-                    <Button variant="warning" type="submit" onClick={handleEditClick}>
+                    <Button variant="warning" className="sx-12 md-8 btn-lg" type="submit" onClick={handleEditClick}>
                     Modifier mes données
                     </Button> 
 
-                    <Button variant="danger" type="" >
+                    <Button variant="danger" type="" className="sx-10 md-8">
                     Supprimer du systeme
                     </Button>
                     </>
@@ -215,6 +396,3 @@ export default function DataCustomerView(props){
         </>
     )
 }
-/* 
-export default function FetchEventController(props){
-*/
