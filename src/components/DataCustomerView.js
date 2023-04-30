@@ -7,6 +7,7 @@ import Datepicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import { format, parse } from 'date-fns';
+//import { fetchCustomers } from './fetch';
 
 
 export default function DataCustomerView(props){
@@ -41,34 +42,9 @@ function formatDateForDatePicker(dateStr) {
   
   const dateCustomerDatase = formatDateForDatePicker(props.customerDatabase.birthdate);
 
-function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
-    return formattedDate;
-  }
-
-
-
-    const [selectedDate, setSelectedDate] = useState("");
-/*
-    // Suppose que props.date est une chaîne de caractères représentant une date au format ISO (par exemple "2022-05-01T00:00:00.000Z")
-    const initialDate = new Date(props.customerDatabase.birthdate);
-    const formattedDate = initialDate.toISOString().split("T")[0]; // extrait la partie date sous forme de chaîne de caractères "yyyy-MM-dd"
-
-    useEffect(() => {
-    setSelectedDate(formattedDate); // met à jour l'état avec la date formatée
-    }, []);
-
-*/
-    //----------------------------------------------------------------
-
-    
-
     const[customer, setCustomer] = useState({
-        id: props.customerDatabase.id ,
+        token:"",
+        id: "",
         name: "" ,
         surname:  "",
         username:  "",
@@ -76,34 +52,72 @@ function formatDate(dateStr) {
         phoneNumber:  ""}, []);
 
 
-    const handleInputChange = (event) => {
-       // event.preventDefault();
-      //  const { name, value } = event.target;
-      //  setCustomer({ ...customer, [name]: value });
-      //const { name, value } = event.target;
 
-        //const target = event.target;
-        //const value = target.value;
-      // const name = target.name;
-
-       // const { name, value } = target;
-
-       const { name, value } = event.target;
-      setCustomer(customer => ({
-           ...customer,
-          [name]: value
-      }));
-
-     // setCustomer({ ...customer, id: props.customerDatabase.id ,username: props.customerDatabase.username });
-     // setCustomer({ ...customer, username: props.customerDatabase.username });
-      console.log("oups   "+customer)
-    };
 
     const handleBothIsEditClickAndTogglereadOnly = async (event) => {
        // event.preventDefault();
         handleEditClick();
         handleTogglereadOnly();
     }
+
+    //-----------------------------------------------------------------------------------------------------
+    //                                          PHASE : URL back with POST
+    //-----------------------------------------------------------------------------------------------------
+    //
+    //POUR LES UPDATE
+    const handleInputChange = async (event) => {// handleSubmit
+         event.preventDefault();
+        
+        try{     
+            
+            const { name, value } = event.target;
+    
+            setCustomer(customer => ({
+                ...customer,
+                [name]: value
+            }));
+//YO!
+            
+            //() => props.updateDataCustomer(customer)
+
+        }catch (error) {
+            console.error('Error:', error);
+        }
+    };
+       //  const { name, value } = event.target;
+       //  setCustomer({ ...customer, [name]: value });
+       //const { name, value } = event.target;
+ 
+         //const target = event.target;
+         //const value = target.value;
+       // const name = target.name;
+ 
+        // const { name, value } = target;
+ 
+
+    //   console.log("oups   "+customer)
+    // };//
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  //-----------------------------------------------------------------------------------------------------
+  //                                          PHASE : URL back with POST
+  //-----------------------------------------------------------------------------------------------------
+  //
+handleSubmit
+
+
+
+//YO! Mis en comme 
+                const handleSubmit = async (event) => {
+                    event.preventDefault();
+                    try {
+                    const data = await  props.updateDataCustomer(customer);//fetchCustomers(customer);
+                    console.log(data);
+                    } catch (error) {
+                    console.error('Error:', error);
+                    }
+                };
+                
+    //_____________________________________________________________________________________________________
         
     function handleTogglereadOnly() {
             setreadOnly(!readOnly);
@@ -123,13 +137,6 @@ function formatDate(dateStr) {
         console.log("quelle est la date de naissance ?? : "+props.customerDatabase.birthdate)
         console.log('bus : '+ dateCustomerDatase)
 
-
-        //phase reverseeeing
-        //import { format, parse } from 'date-fns';
-
-        //import moment from 'moment';
-
-// ...
         console.log("petit retou --- #6 !!-----------------------------------");
         const dateStr6 = 'Tue Mar 28 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)';
         const dateObj6 = moment(dateStr6, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
@@ -137,66 +144,34 @@ function formatDate(dateStr) {
 
         console.log("??????????00  :  "+formattedDate6); // output: '2023-03-28'
 
-/*
-        console.log("petit retou --- #5-----------------------------------");
-        const { parse, format } = require('date-fns');
-
-        const dateStr5 = 'Tue Mar 28 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)';
-        const dateObj5 = parse(dateStr5, "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzz)", new Date());
-        const formattedDate5 = format(dateObj5, 'yyyy-MM-dd');
-        console.log("Date formatée : " + formattedDate5);
-
-
-        console.log("petit retou --- #4-----------------------------------");
-
-        const dateStr4 = 'Tue Mar 28 2023 00:00:00 GMT+0200';
-        const dateObj4 = parse(dateStr4, 'ddd MMM DD YYYY HH:mm:ss \'GMT\'Z', new Date());
-        const formattedDate4 = format(dateObj4, 'yyyy-MM-dd');
-        console.log("petit retour pour voir si le reverse est efficace : "+formattedDate4);
-
-       
-        console.log("petit retou --- #3-----------------------------------");
-
-        const dateStr3 = 'Tue Mar 28 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)';
-        const dateObj3 = parse(dateStr3, 'EEE MMM dd yyyy HH:mm:ss \'GMT\'Z (zzz)', new Date());
-        const formattedDate3 = format(dateObj3, 'yyyy-MM-dd');
-        console.log("petit retour pour voir si le reverse est efficace : " + formattedDate3);
-
-
-        console.log("petit retou --- #1-----------------------------------");
-
-        const dateReversed = props.customerDatabase.birthdate;
-        const dateObj = moment(dateReversed, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
-        const dateFormattedWep = dateObj.format('YYYY-MM-DD');
-        
-        console.log("la valeur du props : "+props.customerDatabase.birthdate);
-        console.log("la valeur de la converttion a priori  : "+dateObj);
-        console.log("la valeur de la converttion a priori  : "+dateFormattedWep);
-
-        console.log("petit retou ---- #2----------------------------------");
-        const dateStr2 = 'Tue Mar 28 2023 00:00:00 GMT+0200';
-        const dateObj2 = parse(dateStr2, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ', new Date());
-        const formattedDate2 = format(dateObj2, 'yyyy-MM-dd');
-        console.log("petit retour pour voir si le reverse est efficace : "+formattedDate2);
-*/
-        setCustomer(customer => ({
+       setCustomer(customer => ({
             ...customer,
-           id: props.customerDatabase.id,
-           username: props.customerDatabase.username,
-           name: props.customerDatabase.name,
-           surname: props.customerDatabase.surname,
-           phoneNumber: props.customerDatabase.phoneNumber,
-           birthdate:date
-          // birthdate: props.customerDatabase.birthdate
-           // birthdate:dateCustomerDatase// formattedDate//formattedDate// props.customerDatabase.birthdate
+            id: props.customerDatabase.id,
+            username: props.customerDatabase.username,
+            name: props.customerDatabase.name,
+            surname: props.customerDatabase.surname,
+            phoneNumber: props.customerDatabase.phoneNumber,
+            //date du jour si non selectionnée par l'utilisateur
+            birthdate:date
        }));
       };
     
-      const handleSaveClick = async (event) => {
-        event.preventDefault();
-        console.log(customer)
-   
-       setIsediting(false);
+        //const handleSaveClick = async (event) => {
+        function handleSaveClick(event)  {    
+            event.preventDefault();
+            console.log("on va bientot proceder a l'enregistrement : "+customer)
+                            //   props.onFetch()
+        
+            props.updateDataCustomer(customer);
+                            // onFormSubmit(customer);
+
+                            //--------------------------------------
+                            // props.onFormSubmit(customer);
+
+            console.log("alors ? que vaut customer (nom) dans la VIEW ?"+customer.name);
+            setIsediting(false);
+           
+                            // props.updateDataCustomer;
       };
 
       const handleDateChange = (date, field) => {
@@ -232,11 +207,49 @@ function formatDate(dateStr) {
                 </Button> 
                    
                 <br/>
-                <Form 
-                onSubmit={handleSaveClick}//{handleEditClick}
+                <Form   
+//YO!
+                   method="POST"
+                   //onFetch={() => props.updateDataCustomer(customer)}
+                //    onSubmit={() => props.updateDataCustomer(customer)} 
+                onSubmit={handleSubmit}
+
+                   // onFetch={handleSaveClick}//{handleEditClick}
   
                 >
-
+                <Form.Group className="mb-3" hidden>
+                        <Form.Label>id</Form.Label>
+                        {!isEditing ? 
+                            <>
+                                <Form.Control 
+                                type="text"  className="form-control" 
+                                id="id" name="id" 
+                                disabled readOnly
+                                //value= {props.customerDatabase.name} 
+                               // onChange={handleInputChange} 
+                               defaultValue={props.customerDatabase.id}
+                               onChange={handleInputChange}    
+                                required 
+                                />
+                            </>
+                            :
+                            <>
+                                <Form.Control 
+                                    type="text"  
+                                    className="form-control" 
+                                    id="id" 
+                                    name="id" 
+                                    onChange={handleInputChange}  
+                                    required 
+                              
+                                />
+                                <Form.Text className="text-muted">
+                                    A degager :   {props.customerDatabase.id} 
+                                </Form.Text>
+                            </>
+                        }               
+                </Form.Group>
+//------------------------------------------------------------
                 <Form.Group className="mb-3" >
                         <Form.Label>Nom</Form.Label>
                         {!isEditing ? 
@@ -341,7 +354,40 @@ function formatDate(dateStr) {
                             </>
                         }
                 </Form.Group>
-
+                //----------------------------------------------------------------------------------------
+                <Form.Group className="mb-3" hidden>
+                        <Form.Label>username</Form.Label>
+                        {!isEditing ? 
+                            <>
+                                <Form.Control 
+                                type="text"  className="form-control" 
+                                id="username" name="username" 
+                                disabled readOnly
+                                //value= {props.customerDatabase.name} 
+                               // onChange={handleInputChange} 
+                               defaultValue={props.customerDatabase.username}
+                               onChange={handleInputChange}    
+                                required 
+                                />
+                            </>
+                            :
+                            <>
+                                <Form.Control 
+                                    type="text"  
+                                    className="form-control" 
+                                    id="username" 
+                                    name="username" 
+                                    onChange={handleInputChange}  
+                                    required 
+                              
+                                />
+                                <Form.Text className="text-muted">
+                                    A degager :   {props.customerDatabase.username} 
+                                </Form.Text>
+                            </>
+                        }               
+                </Form.Group>
+//---------------------------------------------------------------
                 <Form.Group className="mb-3" >
                         <Form.Label>Numéro de téléphone</Form.Label>
                         {!isEditing ? 
@@ -374,7 +420,11 @@ function formatDate(dateStr) {
                 
                 {isEditing ? 
                 (
-                    <Button type="submit" onClick={handleSaveClick} className="sx-10 md-8">
+                    <Button 
+                        type="submit"
+                       // onSubmit={handleSaveClick} 
+                        
+                        className="sx-10 md-8">
                     Enregistrer les modifications
                     </Button>
 
