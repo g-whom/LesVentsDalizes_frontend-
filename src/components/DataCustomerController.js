@@ -17,7 +17,7 @@ import DataCustomerView from "./DataCustomerView"
             phoneNumber:""
           });
     
-        const [owner, setOwner] = useState();
+     //   const [owner, setOwner] = useState();
         useEffect(() => {
             fetchCustomer();
         }, []); // Le tableau vide en second argument indique que useEffect() ne doit s'exécuter qu'une seule fois, à l'initialisation du composant.
@@ -54,9 +54,7 @@ import DataCustomerView from "./DataCustomerView"
                 birthdate: json.birthdate,
                 phoneNumber: json.phoneNumber,
             });
-            //console.log(customerDatabase);
-            //console.log(json);
-        
+
             })
             .catch(error => {
             console.log(error);
@@ -78,36 +76,27 @@ import DataCustomerView from "./DataCustomerView"
             }; 
 
             try {
-        
-        
-            //  const handleFormSubmit = async (customerDatabase) => {
-            //console.log("verifiont le nom mis a joutr : "+props.customer.name);
-
-                console.log('on est dans la requestOtions : '+customer);
-                console.log('on est dans la requestOtions name : '+customer.name);
-
-//                const response = await fetch("http://localhost:8097/customers/update/data/customer", requestOptions)
-                const response  = await fetch("http://localhost:8097/customers/update/data/customer", requestOptions); //let resJson = await res.json();
+                
+                const response  = await fetch("http://localhost:8097/customers/update/data/customer", requestOptions); 
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
+                console.log("Ei si nous examinions le jon depuis le controller ? :"+response.json);
+                console.log("-------------------------------------------------------- :");
+
+                //update visual
+                props.setOwner({...props.owner, id:data.id, name:data.name, surname:data.surname});
+
                 return data;
+
             }catch (error) {
                 console.log("c'est la catastrophe !!!")
                     console.error('Error:', error);
                     throw new Error('An error occurred while fetching the customers');
             }
-/*
-        if (res.status === 200) {
-          setName("");
-          setEmail("");
-          setMessage("User created successfully");
-        } else {
-          setMessage("Some error occured");
-        }
-*/        
+        
         
        };
             /*        .then((response) => {
@@ -155,8 +144,8 @@ import DataCustomerView from "./DataCustomerView"
             
             <DataCustomerView 
             
-                owner={props.owner}
-                setOwner={setOwner}
+            //    owner={props.owner}
+           //     setOwner={setOwner}
                                                  customerDatabase={customerDatabase}
                 setCustomerDatabase={setCustomerDatabase}
 
@@ -172,6 +161,8 @@ import DataCustomerView from "./DataCustomerView"
                 updateDataCustomer={(customer) => updateDataCustomer(customer)}
 
               //  onSubmit={() => props.updateDataCustomer(customer)} 
+
+              fetchCustomer={fetchCustomer}
                 
             />
         </>

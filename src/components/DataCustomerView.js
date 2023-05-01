@@ -7,6 +7,7 @@ import Datepicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import { format, parse } from 'date-fns';
+import { Link } from "react-router-dom";
 //import { fetchCustomers } from './fetch';
 
 
@@ -21,6 +22,10 @@ export default function DataCustomerView(props){
     maxDate.setFullYear(maxDate.getFullYear() - 100);
     const date = new Date();
     const formattedDate = date.toISOString().substring(0, 10);
+
+    const [showModal, setShowModal] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
 //-------------------------------------------------------------------
 function convertDate(dateString) {
@@ -60,6 +65,20 @@ function formatDateForDatePicker(dateStr) {
         handleTogglereadOnly();
     }
 
+
+
+
+    //-----------------------------------------------------------------------------------------------------
+    //                                          MODAL
+    //-----------------------------------------------------------------------------------------------------
+    //
+        const handleClose = () => {
+            setShowModal(false);
+            setIsSuccess(false);
+            setErrorMessage("");
+        
+        };
+      
     //-----------------------------------------------------------------------------------------------------
     //                                          PHASE : URL back with POST
     //-----------------------------------------------------------------------------------------------------
@@ -97,22 +116,42 @@ function formatDateForDatePicker(dateStr) {
 
     //   console.log("oups   "+customer)
     // };//
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
   //-----------------------------------------------------------------------------------------------------
   //                                          PHASE : URL back with POST
   //-----------------------------------------------------------------------------------------------------
   //
-handleSubmit
+//handleSubmit
 
-
+  //-----------------------------------------------------------------------------------------------------
+  //                                          PHASE : Modale spéciale retour affichage info
+  //-----------------------------------------------------------------------------------------------------
+  //
+  /**
+   * WIP: déclenche la fermetute de la modale et appel le mode consultation des données customer
+   */
+    function handleCloseAndEditClick(event){
+        event.preventDefault();
+        handleClose();
+        props.fetchCustomer;
+       // handleEditClick();
+    }
 
 //YO! Mis en comme 
                 const handleSubmit = async (event) => {
                     event.preventDefault();
                     try {
-                    const data = await  props.updateDataCustomer(customer);//fetchCustomers(customer);
+                    const data = await  props.updateDataCustomer(customer);
+                    console.log("Ei si nous examinions le jon depuis lA VIEW >>>>>  ? :"+data);
+                    console.log(" ######################################################## ")
+
                     console.log(data);
+                    console.log(" ######################################################## ")
+                        setIsSuccess(true);
+                        setShowModal(true);
                     } catch (error) {
+                        setIsSuccess(false);
+                        setShowModal(true);
                     console.error('Error:', error);
                     }
                 };
@@ -130,9 +169,10 @@ handleSubmit
      * - copies les données de l'utilisateur actuelles avant eventuelle modifications
      */
     const handleEditClick = async (event) => {
+    // WAIT !! const handleEditClick (event) => {
         event.preventDefault();
         setIsediting(true);
-        handleTogglereadOnly()
+        handleTogglereadOnly();
 
         console.log("quelle est la date de naissance ?? : "+props.customerDatabase.birthdate)
         console.log('bus : '+ dateCustomerDatase)
@@ -249,7 +289,7 @@ handleSubmit
                             </>
                         }               
                 </Form.Group>
-//------------------------------------------------------------
+                
                 <Form.Group className="mb-3" >
                         <Form.Label>Nom</Form.Label>
                         {!isEditing ? 
@@ -354,7 +394,8 @@ handleSubmit
                             </>
                         }
                 </Form.Group>
-                //----------------------------------------------------------------------------------------
+         
+         
                 <Form.Group className="mb-3" hidden>
                         <Form.Label>username</Form.Label>
                         {!isEditing ? 
@@ -387,7 +428,7 @@ handleSubmit
                             </>
                         }               
                 </Form.Group>
-//---------------------------------------------------------------
+
                 <Form.Group className="mb-3" >
                         <Form.Label>Numéro de téléphone</Form.Label>
                         {!isEditing ? 
@@ -430,18 +471,67 @@ handleSubmit
 
                 ) : (
                     <>
-                    
-
-                    <Button variant="warning" className="sx-12 md-8 btn-lg" type="submit" onClick={handleEditClick}>
-                    Modifier mes données
-                    </Button> 
-
-                    <Button variant="danger" type="" className="sx-10 md-8">
-                    Supprimer du systeme
-                    </Button>
+                        <Button 
+                            variant="warning" 
+                            className="sx-12 md-8 btn-lg" 
+                            type="submit" 
+                            onClick={handleEditClick}
+                        >
+                            Modifier mes données
+                        </Button> 
                     </>
                 )}
                 </Form>
+                <Modal show={showModal} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{isSuccess ? "Mise à jour finalisée  !! " : "Mise à jour intérrompue"}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {isSuccess ? 
+                            <>
+                                <h3>"Modification" </h3>
+                                <br/>
+                                <p>Voici vos informations enregistrées dans le système</p>
+                                <br/>
+                                <ul>
+                                    <li>Nom : {customer.name}</li>
+                                    <li>Prénom : {customer.surname}</li>
+                                    <li>Date de naissance : {moment(customer.birthdate).format("YYYY-MM-DD")}</li>
+                                    <li>Numéro de Téléphone: {customer.phoneNumber}</li>       
+                                </ul>
+
+
+
+                            </>
+                            : 
+                            <>
+                                {errorMessage}
+                            </>
+                        }
+                    </Modal.Body>
+                    <Modal.Footer>
+                    {isSuccess ? (
+                        <>
+                        <Button variant="info" as={Link} to="/"  >
+                            Retour à l'accueil
+                        </Button>
+                        <Button variant="success" as={Link} to="/DataCustomerController" onClick={handleCloseAndEditClick}>
+                            Apporter des modifications
+                        </Button>         
+                        </>
+                    ) : (
+                        <>
+                        <Button variant="info" as={Link} to="/">
+                            Retour à l'accueil
+                        </Button>
+                        <Button variant="danger" onClick={handleClose}>
+                            Recommencer
+                        </Button>
+                        </>
+                    )}
+                    </Modal.Footer>
+                </Modal>
+   
             </div>
         </>
     )
