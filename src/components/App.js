@@ -15,6 +15,7 @@ import Connect from "./Connect";
 import LoginExpress from "./LoginExpress";
 import FetchEventController from "./FetchEventController";
 import DataCustomerController from "./DataCustomerController";
+import LoginCustomerController from "./LoginCustomerController";
 
 
 import "../css/fontawesome.all.min.css";
@@ -84,11 +85,14 @@ function handleAccount(){
   return owner != null ?(
     <>    
         <NavDropdown  title={<i className="fa fa-address-card me-2"> Mon compte [WIP]</i> } > 
-          <NavDropdown.Item eventKey="option1" as={Link}  to="/DataCustomerController" > [wait] Mes informations personelles</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option1" as={Link}  to="/DataCustomerController" > [ok] Mes informations personelles</NavDropdown.Item>
           <NavDropdown.Item eventKey="option2">[wait] Mon adresse</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item eventKey="option4">[wait] Mes identifiants</NavDropdown.Item>
-        </NavDropdown>   
+          <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >[WIP] Gerer mon identifiant</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option4">[wait] Gerer mon mot de passse</NavDropdown.Item>
+        </NavDropdown>  
+
+         
     </>
   ) : (<></>)
 }
@@ -159,6 +163,8 @@ function connectDisconect(){
               <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} />} />
               <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} />} />
               <Route exact path="/DataCustomerController" element={<DataCustomerController owner={owner} setOwner={setOwner} />} />
+              <Route exact path="/LoginCustomerController" element={<LoginCustomerController owner={owner} setOwner={setOwner} />} />
+              
           </Routes>
         </Container>
       </BrowserRouter> 
