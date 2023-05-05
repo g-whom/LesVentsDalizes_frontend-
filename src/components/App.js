@@ -5,7 +5,6 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import Welcome from "./Welcome";
 import SecurityController from "./SecurityController";
-import SpaceController from "./SpaceController";
 import { Container, Nav, Navbar} from "react-bootstrap";
 import{DropdownButton, Dropdown, NavDropdown} from "react-bootstrap";
 import CustomerForm from "./CustomerForm";
@@ -29,7 +28,7 @@ export default function App() {
   const [owner, setOwner] = useState(null);
   const [events, setEvents] = useState(null);
 
-  const urlPrefixe = "http://34.155.56.140"
+  const urlPrefixe = "http://34.155.56.140:8097"
 
   function ownerName() {
     return owner != null ? 
@@ -156,7 +155,6 @@ function connectDisconect(){
           <Routes>
               <Route exact path="/" element={<Welcome />} />
               <Route exact path="/welcome" element={<Welcome />} />
-              <Route exact path="/space" element={<SpaceController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe}/>} />
               <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/customerform" element={<CustomerForm  />} />
               <Route exact path="/customerformV2" element={<CustomerFormV2  />} />

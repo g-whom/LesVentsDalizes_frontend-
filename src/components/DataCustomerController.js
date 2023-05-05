@@ -29,11 +29,13 @@ import DataCustomerView from "./DataCustomerView"
         
         };
                                                 ///search/username/{usrnameCustomer}
-        fetch("http://localhost:8097/customers/search/username/"+props.owner.username, requestOptions)
+                                                
+        //fetch("http://localhost:8097/customers/search/username/"+props.owner.username, requestOptions)
+        fetch(props.urlPrefixe+"/search/username/"+props.owner.username, requestOptions)
         .then(response => {
             console.log("la valeur du token est : "+props.owner.token);
             console.log("la valeur de usernames est : "+props.owner.username);
-            console.log("l'url est : http://localhost:8097/customers/search/username/"+props.owner.username);
+          
             if (!response.ok) {
                 console.log("status : "+HttpStatusCode);
                 console.log("Erreur HTTP " + response.status);

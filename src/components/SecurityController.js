@@ -11,6 +11,7 @@ import DataCustomerController from "./DataCustomerController";
       //
     
         //const backUrl = "http://localhost:8097/security";
+        //              http://34.155.56.140
         const backUrl = props.urlPrefixe+"/security";
     
         function fetchOwner(username, password) {

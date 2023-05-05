@@ -123,7 +123,11 @@ const handleRedirectToHomePage = () =>{
       body: JSON.stringify(customer),
     };   
     //http://localhost:8097/regisration/customer/new
-    fetch("http://localhost:8097/security/register", requestOptions)
+
+    //etch("http://localhost:8097/security/register", requestOptions)
+    fetch(props.urlPrefixe+"/security/register", requestOptions)
+
+    
 
     /*
     .then(response => response.json())
