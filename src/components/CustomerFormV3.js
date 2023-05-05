@@ -26,6 +26,7 @@ function CustomerFormV3() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [modalContent, setModalContent] = useState('');
+  
 
   /**
    * date minimal acceptée dans le datepicker des dates de naissance des nouveaux customer
@@ -213,7 +214,7 @@ const handleRedirectToHomePage = () =>{
           placeholder="Selectionnez votre date de naissance" />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="birthdate" hidden>
+      <Form.Group className="mb-3" controlId="subscriptionDate" hidden>
         <Form.Label>Date de souscription</Form.Label>
         <Datepicker 
             type="text"  

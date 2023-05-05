@@ -76,8 +76,9 @@ import DataCustomerView from "./DataCustomerView"
             }; 
 
             try {
-                
-                const response  = await fetch("http://localhost:8097/customers/update/data/customer", requestOptions); 
+                urlPrefixe={urlPrefixe}
+               // const response  = await fetch("http://localhost:8097/customers/update/data/customer", requestOptions); 
+                const response  = await fetch(props.urlPrefixe+"/customers/update/data/customer", requestOptions);
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -143,26 +144,12 @@ import DataCustomerView from "./DataCustomerView"
 
             
             <DataCustomerView 
-            
-            //    owner={props.owner}
-           //     setOwner={setOwner}
-                                                 customerDatabase={customerDatabase}
+ 
+                customerDatabase={customerDatabase}
                 setCustomerDatabase={setCustomerDatabase}
-
-                                               //     onSubmit={handleSaveClick}
-
-
-    
-
-                                                   onUpdateDataCustomer={updateDataCustomer}
-
-                                                   
-
+                onUpdateDataCustomer={updateDataCustomer}
                 updateDataCustomer={(customer) => updateDataCustomer(customer)}
-
-              //  onSubmit={() => props.updateDataCustomer(customer)} 
-
-              fetchCustomer={fetchCustomer}
+                fetchCustomer={fetchCustomer}
                 
             />
         </>
@@ -172,4 +159,4 @@ import DataCustomerView from "./DataCustomerView"
 
     
 
-t}
+}

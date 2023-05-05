@@ -20,7 +20,10 @@ export default function FetchEventController(props){
     
     };
 
-        fetch("http://localhost:8097/events/show/all", requestOptions)
+        //fetch("http://localhost:8097/events/show/all", requestOptions)
+        fetch(props.urlPrefixe+"/events/show/all", requestOptions)
+        
+        
         
             .then(response => {
                 if (!response.ok) {

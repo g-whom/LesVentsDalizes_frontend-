@@ -8,8 +8,10 @@ import DataCustomerController from "./DataCustomerController";
 
     
     export default function SecurityController(props) {
+      //
     
-        const backUrl = "http://localhost:8097/security";
+        //const backUrl = "http://localhost:8097/security";
+        const backUrl = props.urlPrefixe+"/security";
     
         function fetchOwner(username, password) {
             const requestOptions = {

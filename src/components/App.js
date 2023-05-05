@@ -29,6 +29,8 @@ export default function App() {
   const [owner, setOwner] = useState(null);
   const [events, setEvents] = useState(null);
 
+  const urlPrefixe = "http://34.155.56.140"
+
   function ownerName() {
     return owner != null ? 
     (
@@ -154,16 +156,16 @@ function connectDisconect(){
           <Routes>
               <Route exact path="/" element={<Welcome />} />
               <Route exact path="/welcome" element={<Welcome />} />
-              <Route exact path="/space" element={<SpaceController owner={owner} setOwner={setOwner}/>} />
-              <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} />} />
+              <Route exact path="/space" element={<SpaceController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe}/>} />
+              <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/customerform" element={<CustomerForm  />} />
               <Route exact path="/customerformV2" element={<CustomerFormV2  />} />
               <Route exact path="/customerformV3" element={<CustomerFormV3  />} />
               <Route exact path="/connect" element={<Connect  />} />
-              <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} />} />
+              <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} />} />
-              <Route exact path="/DataCustomerController" element={<DataCustomerController owner={owner} setOwner={setOwner} />} />
-              <Route exact path="/LoginCustomerController" element={<LoginCustomerController owner={owner} setOwner={setOwner} />} />
+              <Route exact path="/DataCustomerController" element={<DataCustomerController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
+              <Route exact path="/LoginCustomerController" element={<LoginCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe}/>} />
               
           </Routes>
         </Container>
