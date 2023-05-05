@@ -28,7 +28,7 @@ export default function App() {
   const [owner, setOwner] = useState(null);
   const [events, setEvents] = useState(null);
 
-  const urlPrefixe = "http://34.155.56.140:8097"
+  const urlPrefixe = "http://34.155.56.140"
 
   function ownerName() {
     return owner != null ? 

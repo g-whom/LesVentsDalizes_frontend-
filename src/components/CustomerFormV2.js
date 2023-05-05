@@ -102,8 +102,9 @@ const onAddressChange = (event) => {
 
       },
     };
-
-    fetch("http://localhost:8097/regisration/customer/new", {  
+    
+    //fetch("http://localhost:8097/regisration/customer/new", { 
+    fetch(urlPrefixe+"/regisration/customer/new", { 
       method: "POST",
       headers: {
         "Content-Type": "application/json",

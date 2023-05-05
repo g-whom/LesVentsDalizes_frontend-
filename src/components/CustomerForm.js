@@ -87,7 +87,10 @@ function CustomerForm(props) {
       },
     };
 
-    fetch("http://localhost:8097/regisration/customer/new", {  
+    //urlPrefixe+
+
+    //fetch("http://localhost:8097/regisration/customer/new", {  
+    fetch(urlPrefixe+"/regisration/customer/new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
