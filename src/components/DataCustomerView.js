@@ -48,7 +48,6 @@ function formatDateForDatePicker(dateStr) {
   const dateCustomerDatase = formatDateForDatePicker(props.customerDatabase.birthdate);
 
     const[customer, setCustomer] = useState({
-        token:"",
         id: "",
         name: "" ,
         surname:  "",

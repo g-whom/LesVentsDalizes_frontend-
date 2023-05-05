@@ -31,7 +31,7 @@ import DataCustomerView from "./DataCustomerView"
                                                 ///search/username/{usrnameCustomer}
                                                 
         //fetch("http://localhost:8097/customers/search/username/"+props.owner.username, requestOptions)
-        fetch(props.urlPrefixe+"/search/username/"+props.owner.username, requestOptions)
+        fetch(props.urlPrefixe+"/customers/search/username/"+props.owner.username, requestOptions)
         .then(response => {
             console.log("la valeur du token est : "+props.owner.token);
             console.log("la valeur de usernames est : "+props.owner.username);
@@ -42,6 +42,7 @@ import DataCustomerView from "./DataCustomerView"
                 throw new Error("Une erreur s'est produite lors de la récupération informations du client.");
             }
            // console.log(response.json())
+           console.log("Url fetch (DAtaCustomerController) : "+props.urlPrefixe+"/customers/search/username/"+props.owner.username);
             return response.json();
 
         })
@@ -82,6 +83,8 @@ import DataCustomerView from "./DataCustomerView"
                // const response  = await fetch("http://localhost:8097/customers/update/data/customer", requestOptions); 
                 const response  = await fetch(props.urlPrefixe+"/customers/update/data/customer", requestOptions);
 
+                
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -96,6 +99,8 @@ import DataCustomerView from "./DataCustomerView"
 
             }catch (error) {
                 console.log("c'est la catastrophe !!!")
+                console.log("As ton bien bien un Customer ? "+JSON.stringify(customer));
+                console.log("tchek : "+props.urlPrefixe+"/customers/update/data/customer" );
                     console.error('Error:', error);
                     throw new Error('An error occurred while fetching the customers');
             }

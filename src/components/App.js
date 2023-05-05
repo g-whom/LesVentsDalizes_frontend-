@@ -28,6 +28,8 @@ export default function App() {
   const [owner, setOwner] = useState(null);
   const [events, setEvents] = useState(null);
 
+  //                  http://34.163.245.227:8081/space
+
   const urlPrefixe = "http://34.155.56.140:8097"
 
   function ownerName() {
@@ -153,12 +155,13 @@ function connectDisconect(){
         </Navbar>
         <Container className="bg-light pt-3">
           <Routes>
-              <Route exact path="/" element={<Welcome />} />
-              <Route exact path="/welcome" element={<Welcome />} />
+              <Route exact path="/" element={<Welcome u
+              rlPrefixe={urlPrefixe}  />} />
+              <Route exact path="/welcome" element={<Welcome urlPrefixe={urlPrefixe}  />} />
               <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/customerform" element={<CustomerForm  />} />
               <Route exact path="/customerformV2" element={<CustomerFormV2  />} />
-              <Route exact path="/customerformV3" element={<CustomerFormV3  />} />
+              <Route exact path="/customerformV3" element={<CustomerFormV3 urlPrefixe={urlPrefixe} />} />
               <Route exact path="/connect" element={<Connect  />} />
               <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />

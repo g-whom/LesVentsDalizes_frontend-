@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "http://34.155.56.140:8097",
   "scripts": {
-    "start": "webpack serve --hot --open --mode development --port 3006",
+    
+    "start": "webpack serve --hot --open --mode development  --port 3006",
     "build": "webpack --config webpack.config.js --mode production"
+    
   },
   "keywords": [],
   "author": "",
