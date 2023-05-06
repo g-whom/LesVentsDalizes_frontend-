@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 //
 
 
-function CustomerFormV3() {
+function CustomerFormV3(props) {
   // const [selectedDate, setSelectedDate] = useState(null);
   const date = new Date();
   /**
@@ -171,7 +171,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="name" 
+         // id="name" 
           name="name" 
           value={customer.name} 
           onChange={handleChange} 
@@ -187,7 +187,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="surname" 
+         // id="surname" 
           name="surname" 
           value={customer.surname} 
           onChange={handleChange} 
@@ -200,7 +200,7 @@ const handleRedirectToHomePage = () =>{
         <Datepicker 
           type="text"  
           className="form-control" 
-          id="birthdate" 
+         // id="birthdate" 
           name="birthdate" 
           selected={customer.birthdate} 
           onChange={(date) => handleDateChange(date, "birthdate")}
@@ -223,7 +223,7 @@ const handleRedirectToHomePage = () =>{
         <Datepicker 
             type="text"  
             className="form-control" 
-            id="subscriptionDate" 
+           // id="subscriptionDate" 
             name="subscriptionDate" 
             value={formattedDate}
             onChange={(date) => handleDateChange(date, "subscriptionDate")}
@@ -239,7 +239,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="username"  
           className="form-control" 
-          id="username" 
+         // id="username" 
           name="username" 
           value={customer.username} 
           onChange={handleChange} 
@@ -255,7 +255,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="password" 
+         // id="password" 
           name="password" 
           value={customer.password} 
           onChange={handleChange} 
@@ -280,7 +280,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="phoneNumber" 
+        //  id="phoneNumber" 
           name="phoneNumber" 
           value={customer.phoneNumber} 
           onChange={handleChange} 
@@ -293,7 +293,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="numberRoad" 
+        //  id="numberRoad" 
           name="numberRoad" 
           value={customer.numberRoad} 
           onChange={handleChange} 
@@ -306,7 +306,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="road" 
+        //  id="road" 
           name="road" 
           value={customer.road} 
           onChange={handleChange} 
@@ -319,7 +319,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="zipCode" 
+       //   id="zipCode" 
           name="zipCode" 
           value={customer.zipCode} 
           onChange={handleChange} 
@@ -332,7 +332,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="city" 
+       //   id="city" 
           name="city" 
           value={customer.city} 
           onChange={handleChange} 
@@ -345,7 +345,7 @@ const handleRedirectToHomePage = () =>{
         <Form.Control 
           type="text"  
           className="form-control" 
-          id="country" 
+       //   id="country" 
           name="country" 
           value={customer.country} 
           onChange={handleChange} 
