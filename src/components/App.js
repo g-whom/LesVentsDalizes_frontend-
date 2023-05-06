@@ -30,8 +30,8 @@ export default function App() {
 
   //                  http://34.163.245.227:8081/space
 
-  const urlPrefixe = "http://34.155.56.140:8097"
- // const urlPrefixe = "http://localhost:8097"
+ // const urlPrefixe = "http://34.155.56.140:8097"
+  const urlPrefixe = "http://localhost:8097"
   function ownerName() {
     return owner != null ? 
     (
@@ -166,7 +166,7 @@ function connectDisconect(){
               <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/DataCustomerController" element={<DataCustomerController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
-              <Route exact path="/LoginCustomerController" element={<LoginCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe}/>} />
+              <Route exact path="/LoginCustomerController" element={<LoginCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe} logOut={logOut} />} />
               
           </Routes>
         </Container>

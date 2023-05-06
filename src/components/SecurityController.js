@@ -20,7 +20,8 @@ import DataCustomerController from "./DataCustomerController";
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: username, password: password})
             };
-            fetch(backUrl + "/authorize", requestOptions)
+            //fetch(backUrl + "/authorize", requestOptions)
+            fetch(props.urlPrefixe+"/security/authorize", requestOptions)
             .then((response) => {
                 if (!response.ok) {
                   console.log("Erreur HTTP :", response.status, response.statusText);

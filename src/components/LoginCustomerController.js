@@ -111,6 +111,7 @@ import LoginCustomerView from "./LoginCustomerView";
                   updateDataCustomer={(customer) => updateDataCustomer(customer)}
                     updateLoginCustomer={(customer) => updateLoginCustomer(customer)}
                     fetchCustomer={fetchCustomer}
+                    logOut={props.logOut}
                     
                 />
         </>

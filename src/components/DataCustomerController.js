@@ -79,7 +79,7 @@ import DataCustomerView from "./DataCustomerView"
             }; 
 
             try {
-                urlPrefixe={urlPrefixe}
+                
                // const response  = await fetch("http://localhost:8097/customers/update/data/customer", requestOptions); 
                 const response  = await fetch(props.urlPrefixe+"/customers/update/data/customer", requestOptions);
 
@@ -157,6 +157,8 @@ import DataCustomerView from "./DataCustomerView"
                 onUpdateDataCustomer={updateDataCustomer}
                 updateDataCustomer={(customer) => updateDataCustomer(customer)}
                 fetchCustomer={fetchCustomer}
+
+                //urlPrefixe={urlPrefixe}
                 
             />
         </>

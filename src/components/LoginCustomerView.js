@@ -28,6 +28,9 @@ export default function LoginCustomerView(props) {
     }
     
 
+    const [staticModal, setStaticModal] = useState(false);
+    const toggleShow = () => setStaticModal(!staticModal);
+
     //-----------------------------------------------------------------------------------------------------
     //                                          MODAL
     //-----------------------------------------------------------------------------------------------------
@@ -48,7 +51,7 @@ export default function LoginCustomerView(props) {
         event.preventDefault();
        
        try{     
-           
+            setIsSuccess(true);
            const { name, value } = event.target;
    
            setCustomer(customer => ({
@@ -91,9 +94,10 @@ export default function LoginCustomerView(props) {
             setIsSuccess(true);
             setShowModal(true);
         } catch (error) {
+            console.error('Error:', error);
             setIsSuccess(false);
             setShowModal(true);
-        console.error('Error:', error);
+        
         }
     };    
 
@@ -148,11 +152,6 @@ export default function LoginCustomerView(props) {
   
                 >
 
-
-//--------------------
-    Date de naissance out
-    
-//----------------
          
          
                 <Form.Group className="mb-3" >
@@ -199,7 +198,10 @@ export default function LoginCustomerView(props) {
                         type="submit"
                        // onSubmit={handleSaveClick} 
                         
-                        className="sx-10 md-8">
+                        className="sx-10 md-8"
+                       onClick={toggleShow}
+                      
+                        >
                     Enregistrer les modifications
                     </Button>
 
@@ -216,55 +218,101 @@ export default function LoginCustomerView(props) {
                     </>
                 )}
                 </Form>
-                <Modal show={showModal} onHide={handleClose} data-bs-target="#staticBackdrop" id="staticBackdrop" data-bs-backdrop="static" >
-                    <Modal.Header closeButton>
-                        <Modal.Title>{isSuccess ? "Mise à jour finalisée  !! " : "Mise à jour intérrompue"}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {isSuccess ? 
+
+                {isEditing ?     
+                <>
+                    <Modal show={staticModal} onHide={handleClose} 
+                        //tabIndex="-1"
+                        {...setStaticModal} 
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Mise à jour finalisée  !! </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
                             <>
-                                <h3>"Modification" </h3>
+                            <h3>"Modification" </h3>
                                 <br/>
                                 <p>Voici le nouvel identifiant enregistré dans le systeme</p>
                                 <br/>
                                 <ul>
                                     <li>Username (mail) : {customer.usernameNew}</li> 
                                 </ul>
-
-
+                                <p>Merci de bien vouloir vous connecter de nouveau</p>
 
                             </>
-                            : 
+                        </Modal.Body>
+                        <Modal.Footer>
+
                             <>
+                                
+                                <Button variant="info" as={Link} to="/" className="btn btn-secondary" data-bs-dismiss="modal" onClick={props.logOut}>
+                                    Retour à l'accueil
+
+                                </Button>
+                                <Button variant="success" as={Link} to="/Connect"   onClick={props.logOut}>
+                                    Se connecter
+                                </Button>         
+                            </>
+        
+                        </Modal.Footer>
+                    </Modal>
+                </> 
+                :
+                <> 
+                     <Modal show={staticModal} onHide={handleClose} 
+                        //tabIndex="-1"
+                        {...setStaticModal} 
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>Mise à jour intérrompue </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <>
+                                <p>Erreur :</p>
                                 {errorMessage}
                             </>
-                        }
-                    </Modal.Body>
-                    <Modal.Footer>
-                    {isSuccess ? (
-                        <>
-                            
-                            <Button variant="info" as={Link} to="/" data-bs-dismiss="modal"  >
-                                Retour à l'accueil
-                            </Button>
-                            <Button variant="success" as={Link} to="/LoginCustomerController" onClick={handleCloseAndEditClick}>
-                                Apporter des modifications
-                            </Button>         
-                        </>
-                    ) : (
-                        <>
-                        <Button variant="info" as={Link} to="/">
-                            Retour à l'accueil
-                        </Button>
-                        <Button variant="danger" onClick={handleClose}>
-                            Recommencer
-                        </Button>
-                        </>
-                    )}
-                    </Modal.Footer>
-                </Modal>
+                        </Modal.Body>
+                        <Modal.Footer>
+
+                            <>                
+                                <Button variant="info" as={Link} to="/">
+                                    Retour à l'accueil
+                                </Button>
+                                <Button variant="danger" onClick={handleClose}>
+                                    Recommencer
+                                </Button>         
+                            </>
+        
+                        </Modal.Footer>
+                    </Modal>               
+                </>
+                }
+
+
    
             </div>
         </>
     )
 }
+
+/*
+<div class="modal fade" id="staticBackdrop" 
+data-bs-backdrop="static" data-bs-keyboard="false" 
+tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+*/
