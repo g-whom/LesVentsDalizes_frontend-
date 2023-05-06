@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "http://34.163.245.227",
   "scripts": {
      
     "start": "webpack serve --hot --open --mode development  --port 3006",
