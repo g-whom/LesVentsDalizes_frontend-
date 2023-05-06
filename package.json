@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   
+     "homepage": "http://34.163.245.227", 
     "start": "webpack serve --hot --open --mode development  --port 3006",
     "build": "webpack --config webpack.config.js --mode production"
     
