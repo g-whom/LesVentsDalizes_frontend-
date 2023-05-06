@@ -31,7 +31,7 @@ export default function App() {
   //                  http://34.163.245.227:8081/space
 
   const urlPrefixe = "http://34.155.56.140:8097"
-
+ // const urlPrefixe = "http://localhost:8097"
   function ownerName() {
     return owner != null ? 
     (
