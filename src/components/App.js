@@ -30,8 +30,8 @@ export default function App() {
 
   //                  http://34.163.245.227:8081/space
 
- const urlPrefixe = "http://34.155.56.140:8097"
-//const urlPrefixe = "http://localhost:8097"
+  const urlPrefixe = "http://34.155.56.140"
+  //const urlPrefixe = "http://localhost:8097"
   function ownerName() {
     return owner != null ? 
     (
@@ -155,8 +155,7 @@ function connectDisconect(){
         </Navbar>
         <Container className="bg-light pt-3">
           <Routes>
-              <Route exact path="/" element={<Welcome u
-              rlPrefixe={urlPrefixe}  />} />
+              <Route exact path="/" element={<Welcome urlPrefixe={urlPrefixe}  />} />
               <Route exact path="/welcome" element={<Welcome urlPrefixe={urlPrefixe}  />} />
               <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/customerform" element={<CustomerForm  />} />
