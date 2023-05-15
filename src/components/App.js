@@ -91,9 +91,9 @@ function handleAccount(){
     <>    
         <NavDropdown  title={<i className="fa fa-address-card me-2"> Mon compte [WIP]</i> } > 
           <NavDropdown.Item eventKey="option1" as={Link}  to="/DataCustomerController" > [ok] Mes informations personelles</NavDropdown.Item>
-          <NavDropdown.Item eventKey="option2" as={Link}  to="/UpdateAddressCustomerController" >[WIP] Mon adresse</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option2" as={Link}  to="/UpdateAddressCustomerController" >[ok] Mon adresse</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >[WIP] Gerer mon identifiant</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >[ok] Gerer mon identifiant</NavDropdown.Item>
           <NavDropdown.Item eventKey="option4">[wait] Gerer mon mot de passse</NavDropdown.Item>
         </NavDropdown>  
 
