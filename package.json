@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "http://34.125.232.123",
+
   "scripts": {
-     
+     "homepage": "http://34.125.232.123:3006",
     "start": "webpack serve --hot --open --mode development  --port 3006",
     "build": "webpack --config webpack.config.js --mode production"
     

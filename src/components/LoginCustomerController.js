@@ -62,12 +62,10 @@ import LoginCustomerView from "./LoginCustomerView";
         const updateDataCustomer = async (customer) => {
         
             const requestOptions = {
-                method: "POST",
-                headers: { "Authorization": "Bearer " + props.owner.token ,
-                            "Content-Type": "application/json"
-                        },
-                body: JSON.stringify(customer),
-            
+                headers: { 
+                    "Authorization": "Bearer " + props.owner.token ,         
+                },
+              
             
             }; 
 
@@ -75,7 +73,7 @@ import LoginCustomerView from "./LoginCustomerView";
                
                 
                 //const response  = await fetch("http://localhost:8097/customers/update/username/customer", requestOptions); 
-                const response  = await fetch(props.urlPrefixe+"/customers/update/username/customer", requestOptions); 
+                const response  = await fetch(props.urlPrefixe+"/customers/update/username/customer/"+props.owner.id, requestOptions); 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

@@ -9,10 +9,10 @@ export default function LoginExpress(props) {
     return (
         <Row className="d-flex justify-content-center p-3 pt-5">
             <Card className="max-width-50-rem p-0">
-            <Card.Header className="text-center">ok Authentification</Card.Header>
+            <Card.Header className="text-center">Authentification</Card.Header>
                 <Row className="pt-4 ps-3 pe-3">
                     <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
-                        <output>Identifiant : jeje@whum.com</output>
+                        <output>Identifiant : </output>
                     </Col>
                     <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
                         <InputGroup className="mb-3">
@@ -29,7 +29,7 @@ export default function LoginExpress(props) {
                 </Row>
                 <Row className="ps-3 pe-3">
                     <Col sm={{ offset: 1, span: 10 }} md={3} lg={2}>
-                        <output>Mot de passe+</output>
+                        <output>Mot de passe</output>
                     </Col>
                     <Col sm={{ offset: 1, span: 10 }} md={{ offset: 0, span: 7 }} lg={7}>
                         <InputGroup className="mb-3">
