@@ -82,7 +82,7 @@ function formatDateForDatePicker(dateStr) {
     //                                          PHASE : URL back with POST
     //-----------------------------------------------------------------------------------------------------
     //
-    //POUR LES UPDATE
+    
     const handleInputChange = async (event) => {// handleSubmit
          event.preventDefault();
         
@@ -94,33 +94,13 @@ function formatDateForDatePicker(dateStr) {
                 ...customer,
                 [name]: value
             }));
-//YO!
-            
-            //() => props.updateDataCustomer(customer)
+
 
         }catch (error) {
             console.error('Error:', error);
         }
     };
-       //  const { name, value } = event.target;
-       //  setCustomer({ ...customer, [name]: value });
-       //const { name, value } = event.target;
- 
-         //const target = event.target;
-         //const value = target.value;
-       // const name = target.name;
- 
-        // const { name, value } = target;
- 
 
-    //   console.log("oups   "+customer)
-    // };//
-
-  //-----------------------------------------------------------------------------------------------------
-  //                                          PHASE : URL back with POST
-  //-----------------------------------------------------------------------------------------------------
-  //
-//handleSubmit
 
   //-----------------------------------------------------------------------------------------------------
   //                                          PHASE : Modale spéciale retour affichage info
@@ -133,7 +113,6 @@ function formatDateForDatePicker(dateStr) {
         event.preventDefault();
         handleClose();
         props.fetchCustomer;
-       // handleEditClick();
     }
 
 //YO! Mis en comme 
@@ -141,11 +120,7 @@ function formatDateForDatePicker(dateStr) {
                     event.preventDefault();
                     try {
                     const data = await  props.updateDataCustomer(customer);
-                    console.log("Ei si nous examinions le jon depuis lA VIEW >>>>>  ? :"+data);
-                    console.log(" ######################################################## ")
 
-                    console.log(data);
-                    console.log(" ######################################################## ")
                         setIsSuccess(true);
                         setShowModal(true);
                     } catch (error) {
@@ -168,7 +143,6 @@ function formatDateForDatePicker(dateStr) {
      * - copies les données de l'utilisateur actuelles avant eventuelle modifications
      */
     const handleEditClick = async (event) => {
-    // WAIT !! const handleEditClick (event) => {
         event.preventDefault();
         setIsediting(true);
         handleTogglereadOnly();
@@ -237,20 +211,12 @@ function formatDateForDatePicker(dateStr) {
     return(
         <>
             <div className="container mt-4">
-                <Button variant="primary" type="submit" >
-                    Mode affichage 
-                </Button> 
-                 
-                <Button variant="secondary" type="submit" >
-                    Mode modification
-                </Button> 
+      
                    
                 <br/>
                 <Form   
-//YO!
+
                    method="POST"
-                   //onFetch={() => props.updateDataCustomer(customer)}
-                //    onSubmit={() => props.updateDataCustomer(customer)} 
                 onSubmit={handleSubmit}
 
                    // onFetch={handleSaveClick}//{handleEditClick}

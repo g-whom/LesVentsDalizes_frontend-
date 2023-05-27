@@ -10,12 +10,15 @@ import{DropdownButton, Dropdown, NavDropdown} from "react-bootstrap";
 import CustomerForm from "./CustomerForm";
 import CustomerFormV2 from "./CustomerFormV2";
 import CustomerFormV3 from "./CustomerFormV3";
+import CreateCustomerController from "./CreateCustomerController";
 import Connect from "./Connect";
 import LoginExpress from "./LoginExpress";
 import FetchEventController from "./FetchEventController";
 import DataCustomerController from "./DataCustomerController";
 import LoginCustomerController from "./LoginCustomerController";
 import UpdateAddressCustomerController from "./UpdateAddressCustomerController";
+import UpdatePasswordCustomerController from "./UpdatePasswordCustomerController";
+
 
 
 import "../css/fontawesome.all.min.css";
@@ -32,8 +35,8 @@ export default function App() {
   //                  http://34.163.245.227:8081/space
 
   
-  const urlPrefixe = "http://34.163.70.27:8097"
-  //const urlPrefixe = "http://localhost:8097"
+  //const urlPrefixe = "http://34.163.70.27:8097"
+  const urlPrefixe = "http://localhost:8097"
   function ownerName() {
     return owner != null ? 
     (
@@ -75,7 +78,7 @@ function handlePerformMenu(){
           <NavDropdown.Item eventKey="option1"> [wait] Mes demandes</NavDropdown.Item>
           <NavDropdown.Item eventKey="option2">[wait] Calendrier</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item eventKey="option4">[wait]Devis</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option5">[wait]Devis</NavDropdown.Item>
         </NavDropdown>   
     </>
   ) : (<></>)
@@ -94,7 +97,7 @@ function handleAccount(){
           <NavDropdown.Item eventKey="option2" as={Link}  to="/UpdateAddressCustomerController" >[ok] Mon adresse</NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >[ok] Gerer mon identifiant</NavDropdown.Item>
-          <NavDropdown.Item eventKey="option4">[wait] Gerer mon mot de passse</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option4" as={Link}  to="/updatePasswordCustomerController">[WIP*] Gerer mon mot de passse</NavDropdown.Item>
         </NavDropdown>  
 
          
@@ -117,9 +120,9 @@ function connectDisconect(){
             </>
         ) : (
           <>
-            <Nav.Link eventKey="3" as={Link} to="/customerFormV3"   >
+              <Nav.Link eventKey="3" as={Link} to="/createCustomerController"   >
                 <i className="fa-sharp fa-light fa-memo-pad"></i>
-                Inscription [ok]
+                Inscription #2[WIP]
               </Nav.Link>
               <Nav.Link eventKey="4" as={Link} to="/loginExpress" >
                 <i className="fa fa-key me-2"></i>
@@ -151,7 +154,7 @@ function connectDisconect(){
             {handlePerformMenu()}
             {handleAccount()}
             {showAllEvents()}
-            {connectDisconect()}
+            {connectDisconect()}    
             </Nav>
         </Navbar.Collapse>
         </Navbar>
@@ -163,13 +166,14 @@ function connectDisconect(){
               <Route exact path="/customerform" element={<CustomerForm  />} />
               <Route exact path="/customerformV2" element={<CustomerFormV2  />} />
               <Route exact path="/customerformV3" element={<CustomerFormV3 urlPrefixe={urlPrefixe} />} />
+              <Route exact path="/createCustomerController" element={<CreateCustomerController urlPrefixe={urlPrefixe} />} />
               <Route exact path="/connect" element={<Connect  />} />
               <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/DataCustomerController" element={<DataCustomerController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/LoginCustomerController" element={<LoginCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe} logOut={logOut} />} />
               <Route exact path="/UpdateAddressCustomerController" element={<UpdateAddressCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe} logOut={logOut} />} />
-
+              <Route exact path="/updatePasswordCustomerController" element={<UpdatePasswordCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe} logOut={logOut} />}/>
               
           </Routes>
         </Container>

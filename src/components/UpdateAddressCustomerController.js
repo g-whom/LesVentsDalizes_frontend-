@@ -104,7 +104,6 @@ import UpdateAddressCustomerView from "./UpdateAddressCustomerView";
                     console.log("Erreur HTTP " + response.status);
                     throw new Error("Une erreur s'est produite lors de la récupération informations du client.");
                 }
-               // console.log(response.json())
                 return response.json();
     
             })
@@ -153,13 +152,9 @@ import UpdateAddressCustomerView from "./UpdateAddressCustomerView";
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log("Ei si nous examinions le jSon depuis le controller ? :"+response.json);
-                console.log("Affichons data : "+data);
-                console.log("-------------------------------------------------------- :");
                 return data;
 
             }catch (error) {
-                console.error('Error (depuis le controlleur):', error);
                     throw new Error('An error occurred while fetching the custaddressWithUsernameDtoomers');
             }
         

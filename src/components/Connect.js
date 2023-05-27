@@ -71,7 +71,7 @@ export default function Connect(){
                 </Form.Group>
                 <Button type="submit" className="btn btn-primary" onClick={handleLogout} >Connexion</Button>
               </div>
-            )}
+            )}    
 
          
           </Form>

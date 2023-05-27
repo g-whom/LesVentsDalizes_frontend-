@@ -40,6 +40,7 @@ function CustomerFormV3(props) {
     subscriptionDate: null,
     username: "",
     password:"",
+    confirmPassword:"",
     phoneNumber:"",
     accountClosingDate: null,
     address: {
@@ -122,9 +123,7 @@ const handleRedirectToHomePage = () =>{
        },
       body: JSON.stringify(customer),
     };   
-    //http://localhost:8097/regisration/customer/new
 
-    //etch("http://localhost:8097/security/register", requestOptions)
     fetch(props.urlPrefixe+"/security/register", requestOptions)
 
     
@@ -253,7 +252,7 @@ const handleRedirectToHomePage = () =>{
       <Form.Group className="mb-3" controlId="password">
         <Form.Label>Mot de passe</Form.Label>
         <Form.Control 
-          type="text"  
+          type="password"  
           className="form-control" 
          // id="password" 
           name="password" 
@@ -273,7 +272,36 @@ const handleRedirectToHomePage = () =>{
             </ul>
             
           </Form.Text>
-      </Form.Group>
+      </Form.Group> 
+
+
+      <Form.Group className="mb-3" controlId="confirmPassword">
+        <Form.Label>Confirmation du mot de passe</Form.Label>
+        <Form.Control 
+          type="password"  
+          className="form-control" 
+         // id="confirmPassword" 
+          name="confirmPassword" 
+          value={customer.confirmPassword} 
+          onChange={handleChange} 
+          required 
+          placeholder="Entrez votre mot de passe" />
+          <Form.Text className="text-muted">
+            Il est fortement recommander de privilegier un bon mot de passe car les pirates ne sont jamais loin. 
+            <ul>
+              Alors il faudrait au minimum : 
+              <li>8 caractères</li>
+              <li>1 minuscule</li>
+              <li>1 majuscule</li>
+              <li>1 caratère spécial</li>
+              <li>1 caractère accentué</li>
+            </ul>
+            
+          </Form.Text>
+      </Form.Group> 
+
+
+
 
       <Form.Group className="mb-3" controlId="phoneNumbername">
         <Form.Label>Numéro de téléphone</Form.Label>

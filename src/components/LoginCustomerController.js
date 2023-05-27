@@ -24,8 +24,7 @@ import LoginCustomerView from "./LoginCustomerView";
                 headers: { "Authorization": "Bearer " + props.owner.token }
             
             };
-                                                    ///search/username/{usrnameCustomer}  props.urlPrefixe+
-            //fetch("http://localhost:8097/customers/search/username/"+props.owner.username, requestOptions)
+
             fetch(props.urlPrefixe+"/customers/search/username/"+props.owner.username, requestOptions)
             .then(response => {
                 console.log("la valeur du token est : "+props.owner.token);
@@ -62,38 +61,41 @@ import LoginCustomerView from "./LoginCustomerView";
         const updateDataCustomer = async (customer) => {
         
             const requestOptions = {
+                method: 'POST',
                 headers: { 
                     "Authorization": "Bearer " + props.owner.token ,         
+                    "Content-Type": "application/json"
                 },
-              
+                body: JSON.stringify(customer),
             
             }; 
 
             try {
                
-                
-                //const response  = await fetch("http://localhost:8097/customers/update/username/customer", requestOptions); 
-                const response  = await fetch(props.urlPrefixe+"/customers/update/username/customer/"+props.owner.id, requestOptions); 
+                const response  = await fetch(props.urlPrefixe+"/customers/update/username/customer", requestOptions);
+          
                 if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                   // throw new Error(`HTTP error! Status: ${response.status}`);
+                    return false;
                 }
                 const data = await response.json();
                 console.log("Ei si nous examinions le jon depuis le controller ? :"+response.json);
                 console.log("-------------------------------------------------------- :");
 
-                //update visual
+                //update username
                 props.setOwner({...props.owner, 
-                    //id:data.id, 
-                    //name:data.name, 
-                    username:customer.usernameNew});
+                    username:customer.usernameNew}
+                    );
 
-                return data;
+                //return data;
+                return true;
 
             }catch (error) {
-                console.log("c'est la catastrophe !!!");
+                /*console.log("c'est la catastrophe !!!");
                 console.log("on a quoi comme customer ? "+customer);
-                    console.error('Error:', error);
-                    throw new Error('An error occurred while fetching the customers');
+                console.error('Error:', error); */
+                   // throw new Error('An error occurred while fetching the customers');
+                return false;
             }
         
         
@@ -104,7 +106,7 @@ import LoginCustomerView from "./LoginCustomerView";
             <> 
                 <LoginCustomerView 
 
-                  //  customerLogin={customerLogin} setCustomerLogin={setCustomerLogin}   //props.customerDatabase.id
+                
                   customerDatabase={customerDatabase} setCustomerDatabase={setCustomerDatabase}
                   updateDataCustomer={(customer) => updateDataCustomer(customer)}
                     updateLoginCustomer={(customer) => updateLoginCustomer(customer)}

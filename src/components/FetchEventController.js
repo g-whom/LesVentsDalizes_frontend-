@@ -27,6 +27,7 @@ export default function FetchEventController(props){
         
             .then(response => {
                 if (!response.ok) {
+                    console.log("as ton le token ? : "+props.owner.token)
                     throw new Error("Une erreur  s'est produite lors de la récupération des événements.");
                 }
                 return response.json();

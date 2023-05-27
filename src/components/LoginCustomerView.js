@@ -11,6 +11,13 @@ import LoginCustomerController from "./LoginCustomerController";
 
 export default function LoginCustomerView(props) {
 
+    const [modal, setModal] = useState({
+        isOpen: false,
+        content: '',
+        header: '',
+        footer: '',
+      });
+
     const [readOnly, setreadOnly] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -42,26 +49,28 @@ export default function LoginCustomerView(props) {
     
     };
      
-     //-----------------------------------------------------------------------------------------------------
-    //                                          PHASE : URL back with POST
-    //-----------------------------------------------------------------------------------------------------
-    //
-    //POUR LES UPDATE
+    /**
+     * <h3>this method will update in real time all the changes made on the new identifier</h3>
+     * @param {*} event 
+     * 
+     * @Author: J.VENT
+     */
     const handleInputChange = async (event) => {// handleSubmit
         event.preventDefault();
        
        try{     
-            setIsSuccess(true);
+           // setIsSuccess(true);
            const { name, value } = event.target;
    
            setCustomer(customer => ({
                ...customer,
                [name]: value
            }));
-           
-           //() => props.updateDataCustomer(customer)
+
 
        }catch (error) {
+            console.log(error);
+            //on gere la modal apres !!
            console.error('Error:', error);
        }
    };   
@@ -81,18 +90,76 @@ export default function LoginCustomerView(props) {
     }
 
 
+    /**
+    * <h3>This method executes the update of the connection identfier</h3>.
+    * 
+    *<p>Depending on the succesnot of this execution a modal will be displayed on the screens</p>
+    *
+    * @Author: JVENT
+    * @param {*} event 
+    */
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-        console.log("Quelles sont les valeurs de customer ? : "+customer.username+" and "+customer.usernameNew);
-        const data = await  props.updateDataCustomer(customer);
-        console.log("Ei si nous examinions le jon depuis lA VIEW >>>>>  ? :"+data);
-        console.log(" ######################################################## ")
-
-        console.log(data);
-        console.log(" ######################################################## ")
-            setIsSuccess(true);
-            setShowModal(true);
+            console.log("PEtit apercu de customer avant l'envoie hein !! : "+customer.usernameNew)
+           
+            const isUpdateSuccess = await props.updateDataCustomer(customer);
+            if(isUpdateSuccess){   
+                 setShowModal(true);     
+                 setModal((preModal) => ({
+                     ...preModal,
+                     isOpen: true,
+                     header: "Modification de l'identifiant de connexion (mail) ",
+                     content: (
+                     <div>
+                         <h3>C'est un succès !!</h3>
+                         <br />
+                         <p>Voici votre nouvel identifiant enregistré dans le système</p>
+                         <br />
+                         <ul>
+                         <li>Username (mail) : {customer.usernameNew}</li>
+                         </ul>
+                         <p>Afin de prendre en compte ce changement vous allez $etre déconnecté.</p>
+                     </div>
+                     ),
+                     footer: (
+                     <div>
+                         <Button variant="info" as={Link} to="/" className="btn btn-secondary" data-bs-dismiss="modal" onClick={props.logOut}>
+                         Retour à l'accueil
+                         </Button>
+                         <Button variant="success" as={Link} to="/Connect" onClick={props.logOut}>
+                         Se connecter
+                         </Button>
+                     </div>
+                     )
+                 }));
+               
+                 
+            }else{
+                 setShowModal(false);
+                 setModal((preModal) => ({
+                     ...preModal,
+                     isOpen: false,
+                     header: "Modification de l'identifiant de connexion (mail) ",
+                     content: (
+                     <div>
+                         <h3>Oh no!! Le procéssus semble avoir échoué</h3>
+                     </div>
+                     ),
+                     footer: (
+                     <div>
+                         <Button variant="info" as={Link} to="/" className="btn btn-secondary" data-bs-dismiss="modal" >
+                         Retour à l'accueil
+                         </Button>
+                         <Button variant="success" as={Link} to="/Connect" onClick={handleClose}>
+                             Recommencer
+                         </Button>
+                     </div>
+                     )
+                 }));
+            }
+            //() => props.updateDataCustomer(customer)
+ 
         } catch (error) {
             console.error('Error:', error);
             setIsSuccess(false);
@@ -117,16 +184,6 @@ export default function LoginCustomerView(props) {
         setIsediting(true);
         handleTogglereadOnly();
 
-//    console.log("quelle est la date de naissance ?? : "+props.customerDatabase.birthdate)
-//    console.log('bus : '+ dateCustomerDatase)
-
-//    console.log("petit retou --- #6 !!-----------------------------------");
-//    const dateStr6 = 'Tue Mar 28 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)';
-//    const dateObj6 = moment(dateStr6, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
-//    const formattedDate6 = dateObj6.format('YYYY-MM-DD');
-
-//    console.log("??????????00  :  "+formattedDate6); // output: '2023-03-28'
-
         setCustomer(customer => ({
             ...customer,
             username: props.customerDatabase.username,
@@ -148,7 +205,7 @@ export default function LoginCustomerView(props) {
                     method="POST"
                     onSubmit={handleSubmit}
 
-                   // onFetch={handleSaveClick}//{handleEditClick}
+            
   
                 >
 
@@ -213,78 +270,40 @@ export default function LoginCustomerView(props) {
                             type="submit" 
                             onClick={handleEditClick}
                         >
-                            Modifier mes données
+                            Modifier mon identifiant de connexion
                         </Button> 
+                       
                     </>
                 )}
                 </Form>
 
-                {isEditing ?     
+                { modal.isOpen ?     
                 <>
                     <Modal show={staticModal} onHide={handleClose} 
                         //tabIndex="-1"
                         {...setStaticModal} 
                     >
                         <Modal.Header closeButton>
-                            <Modal.Title>Mise à jour finalisée  !! </Modal.Title>
+                            <Modal.Title>  {modal.header} </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <>
-                            <h3>"Modification" </h3>
-                                <br/>
-                                <p>Voici le nouvel identifiant enregistré dans le systeme</p>
-                                <br/>
-                                <ul>
-                                    <li>Username (mail) : {customer.usernameNew}</li> 
-                                </ul>
-                                <p>Merci de bien vouloir vous connecter de nouveau</p>
+                            
+                            {modal.content}
 
                             </>
                         </Modal.Body>
                         <Modal.Footer>
 
-                            <>
-                                
-                                <Button variant="info" as={Link} to="/" className="btn btn-secondary" data-bs-dismiss="modal" onClick={props.logOut}>
-                                    Retour à l'accueil
-
-                                </Button>
-                                <Button variant="success" as={Link} to="/Connect"   onClick={props.logOut}>
-                                    Se connecter
-                                </Button>         
+                            <>   
+                                {modal.footer}          
                             </>
         
                         </Modal.Footer>
                     </Modal>
                 </> 
                 :
-                <> 
-                     <Modal show={staticModal} onHide={handleClose} 
-                        //tabIndex="-1"
-                        {...setStaticModal} 
-                    >
-                        <Modal.Header closeButton>
-                            <Modal.Title>Mise à jour intérrompue </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <>
-                                <p>Erreur :</p>
-                                {errorMessage}
-                            </>
-                        </Modal.Body>
-                        <Modal.Footer>
-
-                            <>                
-                                <Button variant="info" as={Link} to="/">
-                                    Retour à l'accueil
-                                </Button>
-                                <Button variant="danger" onClick={handleClose}>
-                                    Recommencer
-                                </Button>         
-                            </>
-        
-                        </Modal.Footer>
-                    </Modal>               
+                <>                
                 </>
                 }
 
@@ -295,24 +314,3 @@ export default function LoginCustomerView(props) {
     )
 }
 
-/*
-<div class="modal fade" id="staticBackdrop" 
-data-bs-backdrop="static" data-bs-keyboard="false" 
-tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
-    </div>
-  </div>
-</div>
-*/

@@ -70,20 +70,10 @@ export default function UpdateAddressCustomerView(props) {
                 [name]: value
             
 
- /*     OLD      
-            //   ...prevAddress,
-               addressDto: {
-                ...prevAddress.addressDto,
-                [name]: value
-              }
-
-*/
-
            }));
 
            console.log("Depuis la vu que donne adresse [APRES]? "+address);
            
-           //() => props.updateDataCustomer(address)
 
        }catch (error) {
             setIsSuccess(false);
@@ -154,15 +144,6 @@ const handleSubmit = async (event) => {
         setIsediting(true);
         handleTogglereadOnly();
 
-//    console.log("quelle est la date de naissance ?? : "+props.customerDatabase.birthdate)
-//    console.log('bus : '+ dateCustomerDatase)
-
-//    console.log("petit retou --- #6 !!-----------------------------------");
-//    const dateStr6 = 'Tue Mar 28 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)';
-//    const dateObj6 = moment(dateStr6, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
-//    const formattedDate6 = dateObj6.format('YYYY-MM-DD');
-
-//    console.log("??????????00  :  "+formattedDate6); // output: '2023-03-28'
 
         setAddress((prevAddress) => ({
 
@@ -174,21 +155,6 @@ const handleSubmit = async (event) => {
                 country: props.adresseCustomerDatabase.addressDto.country,
            
 
- /* OLD
-
-            ...prevAddress,
-            username: props.adresseCustomerDatabase.username,
-            addressDto:{...prevAddress.addressDto, 
-               // id:0,
-                numberRoad: props.adresseCustomerDatabase.addressDto.numberRoad,
-                road:  props.adresseCustomerDatabase.addressDto.road,
-                zipCode:  props.adresseCustomerDatabase.addressDto.zipCode,
-                city:  props.adresseCustomerDatabase.addressDto.city,
-                country: props.adresseCustomerDatabase.addressDto.country,
-            } 
-          
-
-*/
         }));
     };
 
@@ -408,7 +374,7 @@ const handleSubmit = async (event) => {
                             type="submit" 
                             onClick={handleEditClick}
                         >
-                            Modifier mes données
+                            Modifier mon adresse
                         </Button> 
                     </>
                 )}

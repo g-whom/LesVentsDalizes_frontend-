@@ -68,6 +68,8 @@ function CustomerForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // commentaire 
+
     const data = {
       name: customer.name,
       surname: customer.surname,
@@ -82,7 +84,7 @@ function CustomerForm(props) {
         road: address.road,
         zipCode: address.zipCode,
         city: address.city,
-        country: address.country, 
+        country: address.country,   
 
       },
     };
