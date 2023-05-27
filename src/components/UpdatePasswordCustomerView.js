@@ -67,10 +67,7 @@ export default function UpdatePasswordCustomerView(props) {
                      footer: (
                      <div>
                          <Button variant="info" as={Link} to="/" className="btn btn-secondary" data-bs-dismiss="modal" onClick={props.logOut}>
-                         Retour à l'accueil
-                         </Button>
-                         <Button variant="success" as={Link} to="/Connect" onClick={props.logOut}>
-                         Se connecter
+                         Se deconnecter
                          </Button>
                      </div>
     
