@@ -7,9 +7,6 @@ import Welcome from "./Welcome";
 import SecurityController from "./SecurityController";
 import { Container, Nav, Navbar} from "react-bootstrap";
 import{DropdownButton, Dropdown, NavDropdown} from "react-bootstrap";
-import CustomerForm from "./CustomerForm";
-import CustomerFormV2 from "./CustomerFormV2";
-import CustomerFormV3 from "./CustomerFormV3";
 import CreateCustomerController from "./CreateCustomerController";
 import Connect from "./Connect";
 import LoginExpress from "./LoginExpress";
@@ -94,13 +91,13 @@ function handleAccount(){
   return owner != null ?(
     <>    
         <NavDropdown  title={<i className="fa fa-address-card me-2"> Mon compte [WIP]</i> } > 
-          <NavDropdown.Item eventKey="option1" as={Link}  to="/DataCustomerController" > [ok] Mes informations personelles</NavDropdown.Item>
-          <NavDropdown.Item eventKey="option2" as={Link}  to="/UpdateAddressCustomerController" >[ok] Mon adresse</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option1" as={Link}  to="/DataCustomerController" > [ok*] Mes informations personelles</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option2" as={Link}  to="/UpdateAddressCustomerController" >[ok*] Mon adresse</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >[ok] Gerer mon identifiant</NavDropdown.Item>
-          <NavDropdown.Item eventKey="option4" as={Link}  to="/updatePasswordCustomerController">[ok] Gerer mon mot de passse</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >[ok*] Gerer mon identifiant</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option4" as={Link}  to="/updatePasswordCustomerController">[ok*] Gerer mon mot de passse</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item eventKey="Option5" as={Link} to="/deleteCustomerController" >[WIP] Supprimer son compte</NavDropdown.Item>
+          <NavDropdown.Item eventKey="Option5" as={Link} to="/deleteCustomerController" >[ok*] Supprimer son compte</NavDropdown.Item>
         </NavDropdown>  
 
          
@@ -117,7 +114,7 @@ function connectDisconect(){
             <>
               <Nav.Link eventKey="4" as={Link} to="/"  onClick={logOut}>
                 <i className="fa-sharp solid fa-right-from-bracket"></i>
-                Deconnection [WIP]
+                Deconnection [ok*]
               </Nav.Link>
               
             </>
@@ -125,12 +122,12 @@ function connectDisconect(){
           <>
               <Nav.Link eventKey="3" as={Link} to="/createCustomerController"   >
                 <i className="fa-sharp fa-light fa-memo-pad"></i>
-                Inscription #2[WIP]
+                Inscription [ok*]
               </Nav.Link>
               <Nav.Link eventKey="4" as={Link} to="/loginExpress" >
                 <i className="fa fa-key me-2"></i>
                
-                Connexion [ok]
+                Connexion [ok*]
             </Nav.Link>
           </>
         )
@@ -166,9 +163,6 @@ function connectDisconect(){
               <Route exact path="/" element={<Welcome   />} />
               <Route exact path="/welcome" element={<Welcome   />} />
               <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
-              <Route exact path="/customerform" element={<CustomerForm  />} />
-              <Route exact path="/customerformV2" element={<CustomerFormV2  />} />
-              <Route exact path="/customerformV3" element={<CustomerFormV3 urlPrefixe={urlPrefixe} />} />
               <Route exact path="/createCustomerController" element={<CreateCustomerController urlPrefixe={urlPrefixe} />} />
               <Route exact path="/connect" element={<Connect  />} />
               <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
