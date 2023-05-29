@@ -18,6 +18,7 @@ import DataCustomerController from "./DataCustomerController";
 import LoginCustomerController from "./LoginCustomerController";
 import UpdateAddressCustomerController from "./UpdateAddressCustomerController";
 import UpdatePasswordCustomerController from "./UpdatePasswordCustomerController";
+import DeleteCustomerController from "./DeleteCustomerController";
 
 
 
@@ -78,7 +79,7 @@ function handlePerformMenu(){
           <NavDropdown.Item eventKey="option1"> [wait] Mes demandes</NavDropdown.Item>
           <NavDropdown.Item eventKey="option2">[wait] Calendrier</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item eventKey="option5">[wait]Devis</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option6">[wait]Devis</NavDropdown.Item>
         </NavDropdown>   
     </>
   ) : (<></>)
@@ -97,7 +98,9 @@ function handleAccount(){
           <NavDropdown.Item eventKey="option2" as={Link}  to="/UpdateAddressCustomerController" >[ok] Mon adresse</NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >[ok] Gerer mon identifiant</NavDropdown.Item>
-          <NavDropdown.Item eventKey="option4" as={Link}  to="/updatePasswordCustomerController">[WIP*] Gerer mon mot de passse</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option4" as={Link}  to="/updatePasswordCustomerController">[ok] Gerer mon mot de passse</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item eventKey="Option5" as={Link} to="/deleteCustomerController" >[WIP] Supprimer son compte</NavDropdown.Item>
         </NavDropdown>  
 
          
@@ -174,6 +177,7 @@ function connectDisconect(){
               <Route exact path="/LoginCustomerController" element={<LoginCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe} logOut={logOut} />} />
               <Route exact path="/UpdateAddressCustomerController" element={<UpdateAddressCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe} logOut={logOut} />} />
               <Route exact path="/updatePasswordCustomerController" element={<UpdatePasswordCustomerController owner={owner} setOwner={setOwner}  urlPrefixe={urlPrefixe} logOut={logOut} />}/>
+              <Route exact path="/deleteCustomerController" element={<DeleteCustomerController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} logOut={logOut} /> }/>
               
           </Routes>
         </Container>
