@@ -32,9 +32,12 @@ export default function App() {
 
   //                  http://34.163.245.227:8081/space
 
-  
+  //Production
   //const urlPrefixe = "http://34.163.70.27:8097"
-  const urlPrefixe = "http://localhost:8097"
+  //TEst
+  const urlPrefixe = "http://34.163.3.3:8097"
+  //DEveloppement
+  //const urlPrefixe = "http://localhost:8097"
   function ownerName() {
     return owner != null ? 
     (
