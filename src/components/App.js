@@ -36,8 +36,12 @@ export default function App() {
   //                  http://34.163.245.227:8081/space
 
   
+ //Production
   //const urlPrefixe = "http://34.163.70.27:8097"
-  const urlPrefixe = "http://localhost:8097"
+  //TEst
+  const urlPrefixe = "http://34.163.3.3:8097"
+  //DEveloppement
+  //const urlPrefixe = "http://localhost:8097"
   function ownerName() {
     return owner != null ? 
     (
@@ -59,7 +63,7 @@ function showAllEvents(){
     <>
             <Nav.Link eventKey="4" as={Link}  to="/FetchEventController"  >
                 <i className="fa-light fa-list-ul"></i>
-                Evennements [WIP]
+                Evennements**
               </Nav.Link>
     </>
   ) : (
@@ -94,13 +98,13 @@ function handleAccount(){
   return owner != null ?(
     <>    
         <NavDropdown  title={<i className="fa fa-address-card me-2"> Mon compte [WIP]</i> } > 
-          <NavDropdown.Item eventKey="option1" as={Link}  to="/DataCustomerController" > [ok] Mes informations personelles</NavDropdown.Item>
-          <NavDropdown.Item eventKey="option2" as={Link}  to="/UpdateAddressCustomerController" >[ok] Mon adresse</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option1" as={Link}  to="/DataCustomerController" >Mes informations personelles</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option2" as={Link}  to="/UpdateAddressCustomerController" >Mon adresse</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >[ok] Gerer mon identifiant</NavDropdown.Item>
-          <NavDropdown.Item eventKey="option4" as={Link}  to="/updatePasswordCustomerController">[ok] Gerer mon mot de passse</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option3" as={Link}  to="/LoginCustomerController" >Gerer mon identifiant</NavDropdown.Item>
+          <NavDropdown.Item eventKey="option4" as={Link}  to="/updatePasswordCustomerController">Gerer mon mot de passse</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item eventKey="Option5" as={Link} to="/deleteCustomerController" >[WIP] Supprimer son compte</NavDropdown.Item>
+          <NavDropdown.Item eventKey="Option5" as={Link} to="/deleteCustomerController" >Supprimer son compte</NavDropdown.Item>
         </NavDropdown>  
 
          
@@ -117,7 +121,7 @@ function connectDisconect(){
             <>
               <Nav.Link eventKey="4" as={Link} to="/"  onClick={logOut}>
                 <i className="fa-sharp solid fa-right-from-bracket"></i>
-                Deconnection [WIP]
+                Deconnection
               </Nav.Link>
               
             </>
@@ -125,12 +129,12 @@ function connectDisconect(){
           <>
               <Nav.Link eventKey="3" as={Link} to="/createCustomerController"   >
                 <i className="fa-sharp fa-light fa-memo-pad"></i>
-                Inscription #2[WIP]
+                Inscription
               </Nav.Link>
               <Nav.Link eventKey="4" as={Link} to="/loginExpress" >
                 <i className="fa fa-key me-2"></i>
                
-                Connexion [ok]
+                Connexion
             </Nav.Link>
           </>
         )
