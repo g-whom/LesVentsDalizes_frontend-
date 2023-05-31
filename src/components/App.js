@@ -20,6 +20,9 @@ import UpdateAddressCustomerController from "./UpdateAddressCustomerController";
 import UpdatePasswordCustomerController from "./UpdatePasswordCustomerController";
 import DeleteCustomerController from "./DeleteCustomerController";
 
+import Footer from './Footer';
+import "../css/footer.css";
+
 
 
 import "../css/fontawesome.all.min.css";
@@ -185,6 +188,7 @@ function connectDisconect(){
               
           </Routes>
         </Container>
+        <Footer />
       </BrowserRouter> 
   );
 }
