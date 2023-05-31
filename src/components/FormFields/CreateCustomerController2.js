@@ -1,8 +1,7 @@
 import { HttpStatusCode } from "axios";
 import React, { useState, useEffect } from "react";
-//import DataCustomerView from "./CreateCustomerView"
 
-import CreateCustomerView from "./CreateCustomerView"
+import CreateCustomerView2 from "./CreateCustomerView2";
 
 
 
@@ -47,7 +46,7 @@ export default function CreateCustomerController(props){
 
     return(
         <>
-            <CreateCustomerView
+            <CreateCustomerView2
 
             
 

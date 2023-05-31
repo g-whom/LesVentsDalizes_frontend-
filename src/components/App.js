@@ -8,6 +8,7 @@ import SecurityController from "./SecurityController";
 import { Container, Nav, Navbar} from "react-bootstrap";
 import{DropdownButton, Dropdown, NavDropdown} from "react-bootstrap";
 import CreateCustomerController from "./CreateCustomerController";
+import CreateCustomerController2 from "./FormFields/CreateCustomerController2";
 import Connect from "./Connect";
 import LoginExpress from "./LoginExpress";
 import FetchEventController from "./FetchEventController";
@@ -127,6 +128,10 @@ function connectDisconect(){
                 <i className="fa-sharp fa-light fa-memo-pad"></i>
                 Inscription [ok*]
               </Nav.Link>
+              <Nav.Link eventKey="3" as={Link} to="/createCustomerController2"   >
+                <i className="fa-sharp fa-light fa-memo-pad"></i>
+                Inscription [new]
+              </Nav.Link>
               <Nav.Link eventKey="4" as={Link} to="/loginExpress" >
                 <i className="fa fa-key me-2"></i>
                
@@ -167,6 +172,7 @@ function connectDisconect(){
               <Route exact path="/welcome" element={<Welcome   />} />
               <Route exact path="/login" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/createCustomerController" element={<CreateCustomerController urlPrefixe={urlPrefixe} />} />
+              <Route exact path="/CreateCustomerController2" element={<CreateCustomerController2 urlPrefixe={urlPrefixe} />}/>
               <Route exact path="/connect" element={<Connect  />} />
               <Route exact path="/FetchEventController" element={<FetchEventController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
               <Route exact path="/loginExpress" element={<SecurityController owner={owner} setOwner={setOwner} urlPrefixe={urlPrefixe} />} />
