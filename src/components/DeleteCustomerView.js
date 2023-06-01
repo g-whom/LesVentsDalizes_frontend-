@@ -52,14 +52,14 @@ export default function DeleteCustomerView(props) {
                          <br />
                          <p>Vous venez de supprimer votre compte du systeme</p>
                          <br />
-                         <p>Dans le cas ou vous auriez des prestations à venir, un mail sera envoyé au administrateur 
-                            afin qu'il puisse prendre contacte avec vous pour faire le point sur des dis prestations.</p>
+                         <p>Dans le cas ou vous auriez des prestations à venir, z vous recevreun appel par le presédent 
+                            afin qu'il puisse prendre contacte avec vous pour faire le point sur vos prestations programmées.</p>
                      </div>
                      ),
                      footer: (
                      <div>
                          <Button variant="info" as={Link} to="/" className="btn btn-secondary" data-bs-dismiss="modal" onClick={props.logOut}>
-                         Se deconnecter
+                         Retour à l'acceuil
                          </Button>
                      </div>
     
@@ -84,7 +84,7 @@ export default function DeleteCustomerView(props) {
                          <Button variant="info" as={Link} to="/" className="btn btn-secondary"  >
                          Retour à l'accueil
                          </Button>
-                         <Button variant="success" as={Link} to="/updatePasswordCustomerController" className="btn btn-warning"  onClick={handleClose}>
+                         <Button variant="success" as={Link} to="/deleteCustomerController" className="btn btn-warning"  onClick={handleClose}>
                              Recommencer
                          </Button>
                      </div>

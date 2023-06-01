@@ -126,7 +126,7 @@ function formatDateForDatePicker(dateStr) {
                     } catch (error) {
                         setIsSuccess(false);
                         setShowModal(true);
-                    console.error('Error:', error);
+                   // console.error('Error:', error);
                     }
                 };
                 
@@ -249,7 +249,7 @@ function formatDateForDatePicker(dateStr) {
                               
                                 />
                                 <Form.Text className="text-muted">
-                                    A degager :   {props.customerDatabase.id} 
+                                       {props.customerDatabase.id} 
                                 </Form.Text>
                             </>
                         }               
@@ -388,7 +388,7 @@ function formatDateForDatePicker(dateStr) {
                               
                                 />
                                 <Form.Text className="text-muted">
-                                    A degager :   {props.customerDatabase.username} 
+                                       {props.customerDatabase.username} 
                                 </Form.Text>
                             </>
                         }               

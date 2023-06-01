@@ -221,7 +221,6 @@ const handleSubmit = async (event) => {
           content: (
             <div>
               <h3>Erreur lors de la création du client</h3>
-              <p>{error.message}</p> // Afficher le message d'erreur capturé
             </div>
           ),
           footer: (
@@ -366,23 +365,8 @@ const handleSubmit = async (event) => {
                 onChange={handleChange} 
                 required 
                 placeholder="Entrez votre mot de passe" />
-                <Form.Text className="text-muted">
-                    Il est fortement recommander de privilegier un bon mot de passe car les pirates ne sont jamais loin. 
-                    <ul>
-                    Alors il faudrait au minimum : 
-                    <li>8 caractères</li>
-                    <li>1 minuscule</li>
-                    <li>1 majuscule</li>
-                    <li>1 caratère spécial</li>
-                    <li>1 caractère accentué</li>
-                    </ul>
-                    
-                </Form.Text>
+
             </Form.Group> 
-
-
-
-
             <Form.Group className="mb-3" controlId="phoneNumbername">
                 <Form.Label>Numéro de téléphone</Form.Label>
                 <Form.Control 
